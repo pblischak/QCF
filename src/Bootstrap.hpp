@@ -2,13 +2,16 @@
 #define BOOTSTRAP_HPP
 
 class Quartet;
+class MbRandom;
 
 class Bootstrap {
 public:
-  Bootstrap(int &nreps){reps = nreps;}
+  Bootstrap(int &nreps);
   ~Bootstrap(){};
-  int reps = 1;
   std::vector<double> operator()(Quartet &qrt);
+  void randomVector(int low, int high, std::vector<int> &vec);
+  MbRandom* r;
+  int reps = 1;
 };
 
 #endif //BOOTSTRAP_HPP
