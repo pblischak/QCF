@@ -13,16 +13,20 @@ public:
   std::vector<SeqData> get_seqs();
   int _nCk(const int& n, int& k);
   void map2qcf(Quartet &q);
-  std::vector<std::string> taxa, seq_files;
+  std::vector<std::string> taxa, seqFiles;
   std::unordered_map<std::string, int> ind2tax;
   std::unique_ptr<QCFTable> qcfs;
+  std::string infile = "none", mapfile = "none";
 
 private:
   void _parseCommandLine(int ac, char* av[]);
   void _checkCommandLineInput();
   void _parseMap();
   void _parseSeqsFile();
-  int _nTaxa = -999, _nHaps = -999, four = 4;
+  std::vector<std::string> _splitString(const std::string &s, char d);
+  int nTaxa = 0, nHaps = 0, four = 4, bootReps = -999;
+  bool quiet = 0;
+  std::string prefix;
 };
 
 /* Calculate binomial coefficient. */
@@ -54,6 +58,9 @@ public:
   std::vector< std::vector < std::vector<double> > > qtab;
   void add_entry(std::vector<double> &entry, int i, int j, int k, int l);
   void write(std::string &outfile);
+
+private:
+  int index(int i, int j, int k, int l);
 };
 
 #endif //QCFDATA_HPP

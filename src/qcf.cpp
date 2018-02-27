@@ -29,20 +29,8 @@ int main(int argc, char* argv[]){
     exit(EXIT_SUCCESS);
   }
 
-  int boot_reps = 4;
   QCFData qcf(argc, argv);
-  Bootstrap boot(boot_reps);
-  std::vector<int> test(10001);
-  boot.randomVector(0,500,test);
-  //std::cout << "[";
-  for(uint i = 1; i < test.size(); i++){
-    std::cout << test[i] << std::endl;
-  }
-  //std::cout << test[test.size() - 1] << "]" << std::endl << std::endl;
   std::vector<SeqData> seqs = qcf.get_seqs();
-  for(uint i = 0; i < seqs.size(); i++){
-    //std::cout << seqs[i].qcfd->taxa.size() << std::endl;
-  }
 
   return EXIT_SUCCESS;
 }

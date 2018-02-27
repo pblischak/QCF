@@ -13,6 +13,8 @@ Bootstrap::Bootstrap(int &nreps){
   r = new MbRandom;
 }
 
+Bootstrap::~Bootstrap(){delete r;}
+
 std::vector<double> Bootstrap::operator()(Quartet &qrt){
   std::vector<double> weights(3, 0.0);
   std::vector< std::vector<double> > boot_results(reps, std::vector<double>(3, 0.0));
