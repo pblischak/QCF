@@ -2,19 +2,26 @@
 #define SEQDATA_HPP
 
 class QCFData;
+class Quartet;
 
 class SeqData {
 public:
   SeqData(std::string &name,
           QCFData* ptr){file_name = name;
-                        qcfd = ptr;}
+                        qcfd = ptr;
+                        _readPhylip();}
   ~SeqData(){}
+  std::vector<Quartet> get_quartets();
   std::string file_name;
   std::vector< std::vector<int> > dna;
   std::vector<std::string> haps;
   QCFData* qcfd;
+  bool skip = 0;
 private:
+  int nSeqs, nSites;
   int _convert(char str);
+  void _checkHap(std::string &hapName);
+  void _readPhylip();
 };
 
 /* Convert DNA bases to ints as they are read in. */

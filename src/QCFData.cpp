@@ -121,7 +121,7 @@ void QCFData::_parseMap(){
         exit(EXIT_FAILURE);
       }
       for(uint i = 0; i < str2.size(); i++){
-        ind2tax.insert({str2[i], taxonIndex});
+        hap2tax.insert({str2[i], taxonIndex});
         nHaps++;
       }
       taxonIndex++;

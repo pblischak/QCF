@@ -14,8 +14,8 @@ public:
   int _nCk(const int& n, int& k);
   void map2qcf(Quartet &q);
   std::vector<std::string> taxa, seqFiles;
-  std::unordered_map<std::string, int> ind2tax;
-  std::unique_ptr<QCFTable> qcfs;
+  std::unordered_map<std::string, int> hap2tax;
+  std::unique_ptr<QCFTable> table;
   std::string infile = "none", mapfile = "none";
 
 private:
@@ -56,7 +56,7 @@ public:
   QCFTable(int nqrts){qtab.resize(nqrts);}
   ~QCFTable(){};
   std::vector< std::vector < std::vector<double> > > qtab;
-  void add_entry(std::vector<double> &entry, int i, int j, int k, int l);
+  void add_entry(int i, int j, int k, int l, std::vector<double> &entry);
   void write(std::string &outfile);
 
 private:

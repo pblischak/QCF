@@ -31,6 +31,18 @@ int main(int argc, char* argv[]){
 
   QCFData qcf(argc, argv);
   std::vector<SeqData> seqs = qcf.get_seqs();
+  for(uint s = 0; s < seqs.size(); s++){
+    if(!seqs[s].skip){
+      std::std::vector<Quartet> qrts = seqs[s].get_quartets();
+    }
+    for(uint q = 0; q < qrts.size(); q++){
+      std::vector<double> res = qrts[q].eval();
+      qcf.table->add_entry(qcf.hap2tax[qrts.A],
+                           qcf.hap2tax[qrts.B],
+                           qcf.hap2tax[qrts.C],
+                           qcf.hap2tax[qrts.D], res);
+    }
+  }
 
   return EXIT_SUCCESS;
 }
