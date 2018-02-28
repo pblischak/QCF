@@ -63,6 +63,10 @@ Map File
 ~~~~~~~~
 
 The mapping file maps haplotypes to sampled taxa.
+The easiest way to do this is to sequentially number the haplotypes
+for each gene (e.g., SpeciesName_1, SpeciesName_2, etc.).
+Genes are treated as independent, so they can reuse the same
+haplotype names. Also, not all genes need to have all haplotypes.
 For each taxon, start with its name, followed by a colon (``:``), then the
 names of the haplotypes that are present in the Phylip files containing the
 sequence data, each separated by a comma (``,``). **There should be no spaces**.
