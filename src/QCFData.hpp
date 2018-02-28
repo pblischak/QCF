@@ -17,6 +17,9 @@ public:
   std::unordered_map<std::string, int> hap2tax;
   std::unique_ptr<QCFTable> table;
   std::string infile = "none", mapfile = "none";
+  int nTaxa = 0, nHaps = 0, four = 4, bootReps = -999;
+  bool quiet = 0;
+  std::string prefix;
 
 private:
   void _parseCommandLine(int ac, char* av[]);
@@ -24,9 +27,6 @@ private:
   void _parseMap();
   void _parseSeqsFile();
   std::vector<std::string> _splitString(const std::string &s, char d);
-  int nTaxa = 0, nHaps = 0, four = 4, bootReps = -999;
-  bool quiet = 0;
-  std::string prefix;
 };
 
 /* Calculate binomial coefficient. */

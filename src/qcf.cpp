@@ -29,21 +29,34 @@ int main(int argc, char* argv[]){
     exit(EXIT_SUCCESS);
   }
 
+  std::vector<int> empty; // An emty vector to pass if no bootstrapping is done.
+  bool bootstrap = 0;
   QCFData qcf(argc, argv);
+  Bootstrap boot(qcf.bootReps);
+  std::vector<double> res(3,0.0);
+  if(boot.reps > 0){
+    bootstrap = 1;
+  }
   std::vector<SeqData> seqs = qcf.get_seqs();
   for(uint s = 0; s < seqs.size(); s++){
-    if(!seqs[s].skip){
-      std::std::vector<Quartet> qrts = seqs[s].get_quartets();
+    if(seqs[s].skip){
+      continue;
     }
+    std::vector<Quartet> qrts = seqs[s].get_quartets();
     for(uint q = 0; q < qrts.size(); q++){
-      std::vector<double> res = qrts[q].eval();
-      qcf.table->add_entry(qcf.hap2tax[qrts.A],
+      if(bootstrap){
+        res = boot(qrts[q]);
+      } else {
+        res = qrts[q].eval(empty);
+      }
+      std::cout << res[0] << "\t" << res[1] << "\t" << res[2] << std::endl;
+
+      /*qcf.table->add_entry(qcf.hap2tax[qrts.A],
                            qcf.hap2tax[qrts.B],
                            qcf.hap2tax[qrts.C],
-                           qcf.hap2tax[qrts.D], res);
+                           qcf.hap2tax[qrts.D], res);*/
     }
   }
-
   return EXIT_SUCCESS;
 }
 

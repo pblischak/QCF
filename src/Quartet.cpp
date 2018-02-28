@@ -1,51 +1,126 @@
+#include <assert.h>
+#include <iostream>
+#include <iterator>
+#include <algorithm>
+#include <vector>
 
+#include "SeqData.hpp"
+#include "Quartet.hpp"
+#include "qcf.hpp"
 
-void Quartet::getCountMatrix(const int& one,
-                             const int& two,
-                             const int& three,
-                             const int& four,
-                             double cp[16][16]){
-  for(int s = 0; s < seqPtr->nSites; s++){
-    if(seqPtr->dna[one][s]   < 4 &&
-       seqPtr->dna[two][s]   < 4 &&
-       seqPtr->dna[three][s] < 4 &&
-       seqPtr->dna[four][s]  < 4){
-      cp[seqPtr->dna[one][s]   * 4 + seqPtr->dna[two][s]]
-        [seqPtr->dna[three][s] * 4 + seqPtr->dna[four][s]] += 1.0;
+void Quartet::getCountMatrices(std::vector<int> &ix){
+  assert(ix.size() == seqPtr->nSites);
+  for(std::vector<int>::iterator s = ix.begin();
+      s != ix.end(); s++){
+    if(seqPtr->dna[A][*s] < 4 &&
+       seqPtr->dna[B][*s] < 4 &&
+       seqPtr->dna[C][*s] < 4 &&
+       seqPtr->dna[D][*s] < 4){
+      ABCD[seqPtr->dna[A][*s] * 4 + seqPtr->dna[B][*s]]
+          [seqPtr->dna[C][*s] * 4 + seqPtr->dna[D][*s]] += 1.0;
+      ACBD[seqPtr->dna[A][*s] * 4 + seqPtr->dna[C][*s]]
+          [seqPtr->dna[B][*s] * 4 + seqPtr->dna[D][*s]] += 1.0;
+      ADBC[seqPtr->dna[A][*s] * 4 + seqPtr->dna[D][*s]]
+          [seqPtr->dna[B][*s] * 4 + seqPtr->dna[C][*s]] += 1.0;
     } else if(!ignore_amb_sites){
-      resolved = _resolveAmbiguity(_dnaMatrix[_taxaMap[_outgroup][i]][s],
-                                   _dnaMatrix[_taxaMap[p1][j]][s],
-                                   _dnaMatrix[_taxaMap[hyb][k]][s],
-                                   _dnaMatrix[_taxaMap[p2][r]][s], cp);
+      resolved = resolveAmbiguity(seqPtr->dna[A][*s],
+                                  seqPtr->dna[B][*s],
+                                  seqPtr->dna[C][*s],
+                                  seqPtr->dna[D][*s]);
     }
   }
 }
 
-void Quartet::resolveAmbiguity(const int& one,
+bool Quartet::resolveAmbiguity(const int& one,
                                const int& two,
                                const int& three,
-                               const int& four,
-                               double cp[16][16]){
+                               const int& four){
   /* Check to see if any combination of three of the four taxa are ambiguous. */
   double denom = 0.0;
-  if((one >= 4 && two  >= 4 && three >= 4) ||
-     (one >= 4 && two  >= 4 && four  >= 4) ||
+  if((one >= 4 && two   >= 4 && three >= 4) ||
+     (one >= 4 && two   >= 4 && four  >= 4) ||
      (one >= 4 && three >= 4 && four  >= 4) ||
-     (two  >= 4 && three >= 4 && four  >= 4)){
-    return 0.0;
+     (two >= 4 && three >= 4 && four  >= 4)){
+    return 0;
   } else if(one == 4 || two == 4 || three == 4 || four == 4){ /* Don't allow gaps. */
-    return 0.0;
+    return 0;
   } else {
-    denom = _baseLookup[one].size() * _baseLookup[two].size() * _baseLookup[three].size() * _baseLookup[four].size();
-    for(unsigned i = 0; i < _baseLookup[one].size(); i++){
-      for(unsigned j = 0; j < _baseLookup[two].size(); j++){
-        for(unsigned k = 0; k < _baseLookup[three].size(); k++){
-          for(unsigned r = 0; r < _baseLookup[four].size(); r++){
-            cp[_baseLookup[one][i] * 4 + _baseLookup[two][j]]
-              [_baseLookup[three][k] * 4 + _baseLookup[four][r]] += 1.0 / denom;
+    denom = baseLookup[one].size()   * baseLookup[two].size()
+          * baseLookup[three].size() * baseLookup[four].size();
+    for(unsigned i = 0; i < baseLookup[one].size(); i++){
+      for(unsigned j = 0; j < baseLookup[two].size(); j++){
+        for(unsigned k = 0; k < baseLookup[three].size(); k++){
+          for(unsigned r = 0; r < baseLookup[four].size(); r++){
+            ABCD[baseLookup[one][i]   * 4 + baseLookup[two][j]]
+                [baseLookup[three][k] * 4 + baseLookup[four][r]]  += 1.0 / denom;
+            ACBD[baseLookup[one][i]   * 4 + baseLookup[three][j]]
+                [baseLookup[two][k]   * 4 + baseLookup[four][r]]  += 1.0 / denom;
+            ADBC[baseLookup[one][i]   * 4 + baseLookup[four][j]]
+                [baseLookup[two][k]   * 4 + baseLookup[three][r]] += 1.0 / denom;
           }
         }
       }
     }
+  }
+  return 1;
+}
+
+std::vector<double> Quartet::eval(std::vector<int> &vec){
+  std::vector<double> scores(3,0.0);
+  std::vector<double> weights(3,0.0);
+  if(vec.size() == 0){
+    getCountMatrices(index);
+  } else {
+    getCountMatrices(vec);
+  }
+  for(uint i = 0; i < 4; i++){
+    for(uint j = 0; j < 4; j++){
+      for(uint k = 0; k < 4; k++){
+        for(uint l = 0; l< 4; l++){
+          if(ABCD[i * 4 + j][k * 4 + l] == ABCD[i * 4 + j][l * 4 + k]){
+            scores[0] += 1.0;
+          }
+          if(ACBD[i * 4 + j][k * 4 + l] == ACBD[i * 4 + j][l * 4 + k]){
+            scores[1] += 1.0;
+          }
+          if(ADBC[i * 4 + j][k * 4 + l] == ADBC[i * 4 + j][l * 4 + k]){
+            scores[2] += 1.0;
+          }
+        }
+      }
+    }
+  }
+  weights = getWeights(scores);
+  return weights;
+}
+
+std::vector<double> Quartet::getWeights(std::vector<double> &vec){
+  std::vector<double> res(3,0.0);
+  assert(vec.size() == 3);
+  double maxVal = vec[0];
+  int maxIndex  = 0;
+  if(vec[0] == vec[1] && vec[0] == vec[2]){
+    res = {1.0 / 3.0, 1.0 / 3.0, 1.0 / 3.0};
+  } else if(vec[0] == vec[1] && vec[0] > vec[2]){
+    res = {0.5, 0.5, 0.0};
+  } else if(vec[0] == vec[2] && vec[0] > vec[1]){
+    res = {0.5, 0.0, 0.5};
+  } else if(vec[1] == vec[2] && vec[1] > vec[0]){
+    res = {0.0, 0.5, 0.5};
+  } else {
+    for(uint i = 1; i< 3; i++){
+      if(vec[i] > maxVal){
+        maxIndex = i;
+        maxVal   = vec[i];
+      }
+    }
+    res[maxIndex] += 1.0;
+  }
+  return res;
+}
+
+void Quartet::makeIndexVec(){
+  for(uint s = 0; s < seqPtr->nSites; s++){
+    index.push_back(s);
   }
 }

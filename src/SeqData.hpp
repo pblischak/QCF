@@ -7,18 +7,18 @@ class Quartet;
 class SeqData {
 public:
   SeqData(std::string &name,
-          QCFData* ptr){file_name = name;
-                        qcfd = ptr;
+          QCFData* qcf){file_name = name;
+                        qcfPtr = qcf;
                         _readPhylip();}
   ~SeqData(){}
   std::vector<Quartet> get_quartets();
   std::string file_name;
   std::vector< std::vector<int> > dna;
   std::vector<std::string> haps;
-  QCFData* qcfd;
+  QCFData* qcfPtr;
+  int nSeqs, nSites;
   bool skip = 0;
 private:
-  int nSeqs, nSites;
   int _convert(char str);
   void _checkHap(std::string &hapName);
   void _readPhylip();

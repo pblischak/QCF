@@ -5,19 +5,24 @@ class SeqData;
 
 class Quartet {
 public:
-  Quartet(std::string i, std::string j,
-          std::string k, std::string l,
+  Quartet(int i, int j,
+          int k, int l,
           SeqData *seq){A = i;
                         B = j;
                         C = k;
                         D = l;
-                        seqPtr = seq;};
-  Quartet(){};
-  std::string A, B, C, D;
+                        seqPtr = seq;
+                        makeIndexVec();}
+  ~Quartet(){};
+
+  std::vector<double> eval(std::vector<int> &vec);
+  int A, B, C, D;
+  bool resolved = 0;
+  std::vector<int> index;
   double ABCD[16][16] = {{0.0}},
          ACBD[16][16] = {{0.0}},
          ADBC[16][16] = {{0.0}};
-  static std::vector<std::vector<int> > baseLookup = { /* {A,G,C,T} == {0,1,2,3} */
+  const std::vector<std::vector<int> > baseLookup = { /* {A,G,C,T} == {0,1,2,3} */
     {0},
     {1},
     {2},
@@ -38,7 +43,15 @@ public:
   SeqData* seqPtr;
 
 private:
+  void getCountMatrices(std::vector<int> &ix);
+  bool resolveAmbiguity(const int& one,
+                        const int& two,
+                        const int& three,
+                        const int& four);
+
   bool ignore_amb_sites = 0;
+  std::vector<double> getWeights(std::vector<double> &vec);
+  void makeIndexVec();
 };
 
 #endif //QUARTET_HPP

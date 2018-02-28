@@ -7,7 +7,7 @@ class MbRandom;
 class Bootstrap {
 public:
   Bootstrap(int &nreps);
-  ~Bootstrap();
+  ~Bootstrap(){};
   std::vector<double> operator()(Quartet &qrt);
   void randomVector(int low, int high, std::vector<int> &vec);
   MbRandom* r;
