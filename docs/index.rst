@@ -6,15 +6,17 @@
 QCF: Estimating Quartet Concordance Factors
 ===========================================
 
+QCF is a C++ program for estimating quartet concordance factors
+from multilocus sequence data. It uses the theory of phylogenetic
+invariants to calculate the frequency of gene tree quartets matching
+the three possible unrooted species tree topologies for a set of four
+taxa. QCF can handle multiple haplotypes per taxon/population,
+
+SNaQ method `PhyloNetworks <http://crsl4.github.io/PhyloNetworks.jl/latest/>`__.
+
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 1
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   getting_started.rst
+   tutorial.rst
+   api.rst
