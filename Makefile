@@ -2,6 +2,7 @@ EXE = qcf
 OBJ = src/Bootstrap.o \
 			src/MbRandom.o \
 			src/SeqData.o \
+			src/QCFTable.o \
 			src/QCFData.o \
 			src/Quartet.o \
 			src/qcf.o

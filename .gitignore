@@ -2,3 +2,6 @@ qcf
 src/*.o
 *~
 .*~
+tests/*.txt
+!genes.txt
+!map.txt

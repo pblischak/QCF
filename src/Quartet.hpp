@@ -5,18 +5,14 @@ class SeqData;
 
 class Quartet {
 public:
-  Quartet(int i, int j,
-          int k, int l,
-          SeqData *seq){A = i;
-                        B = j;
-                        C = k;
-                        D = l;
-                        seqPtr = seq;
-                        makeIndexVec();}
+  Quartet(std::string i, std::string j,
+          std::string k, std::string l,
+          SeqData *seq);
   ~Quartet(){};
 
   std::vector<double> eval(std::vector<int> &vec);
   int A, B, C, D;
+  std::string hapA, hapB, hapC, hapD;
   bool resolved = 0;
   std::vector<int> index;
   double ABCD[16][16] = {{0.0}},

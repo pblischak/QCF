@@ -9,23 +9,25 @@ public:
   SeqData(std::string &name,
           QCFData* qcf){file_name = name;
                         qcfPtr = qcf;
-                        _readPhylip();}
+                        readPhylip();}
   ~SeqData(){}
   std::vector<Quartet> get_quartets();
   std::string file_name;
   std::vector< std::vector<int> > dna;
   std::vector<std::string> haps;
+  std::unordered_map<std::string, uint> seqIndex;
+  std::vector<uint> orderHaps(uint i, uint j, uint k, uint l);
   QCFData* qcfPtr;
   int nSeqs, nSites;
   bool skip = 0;
 private:
-  int _convert(char str);
-  void _checkHap(std::string &hapName);
-  void _readPhylip();
+  int convert(char str);
+  void checkHap(std::string &hapName);
+  void readPhylip();
 };
 
 /* Convert DNA bases to ints as they are read in. */
-inline int SeqData::_convert(char str){
+inline int SeqData::convert(char str){
   int _baseCode = 999;
   switch (str) {
     case 'A': case 'a': _baseCode = 0;  break;

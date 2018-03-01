@@ -4,11 +4,12 @@
 #include <vector>
 #include <unordered_map>
 
+#include "qcf.hpp"
+#include "QCFTable.hpp"
 #include "QCFData.hpp"
 #include "SeqData.hpp"
 #include "Quartet.hpp"
 #include "Bootstrap.hpp"
-#include "qcf.hpp"
 
 int main(int argc, char* argv[]){
   /* Initial parsing of command line options to look for -h / --help,
@@ -32,6 +33,7 @@ int main(int argc, char* argv[]){
   std::vector<int> empty; // An emty vector to pass if no bootstrapping is done.
   bool bootstrap = 0;
   QCFData qcf(argc, argv);
+  QCFTable table(&qcf);
   Bootstrap boot(qcf.bootReps);
   std::vector<double> res(3,0.0);
   if(boot.reps > 0){
@@ -42,21 +44,27 @@ int main(int argc, char* argv[]){
     if(seqs[s].skip){
       continue;
     }
+    std::cout << "Analyzing gene " << s+1 << " (" << seqs[s].haps.size() << "): ";
     std::vector<Quartet> qrts = seqs[s].get_quartets();
+    std::cout << qrts.size() << " quartets.\n";
     for(uint q = 0; q < qrts.size(); q++){
       if(bootstrap){
         res = boot(qrts[q]);
       } else {
         res = qrts[q].eval(empty);
       }
-      std::cout << res[0] << "\t" << res[1] << "\t" << res[2] << std::endl;
-
-      /*qcf.table->add_entry(qcf.hap2tax[qrts.A],
-                           qcf.hap2tax[qrts.B],
-                           qcf.hap2tax[qrts.C],
-                           qcf.hap2tax[qrts.D], res);*/
+      //std::cout << res[0] << "\t" << res[1] << "\t" << res[2] << std::endl;
+      //std::cout << qcf.hap2tax[qrts[q].hapA] << std::endl;
+      //std::cout << qcf.hap2tax[qrts[q].hapB] << std::endl;
+      //std::cout << qcf.hap2tax[qrts[q].hapC] << std::endl;
+      //std::cout << qcf.hap2tax[qrts[q].hapD] << std::endl;
+      table.addValue(qcf.hap2tax[qrts[q].hapA],
+                     qcf.hap2tax[qrts[q].hapB],
+                     qcf.hap2tax[qrts[q].hapC],
+                     qcf.hap2tax[qrts[q].hapD], res);
     }
   }
+  table.write(qcf.prefix);
   return EXIT_SUCCESS;
 }
 

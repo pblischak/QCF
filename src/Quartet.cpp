@@ -2,11 +2,21 @@
 #include <iostream>
 #include <iterator>
 #include <algorithm>
+#include <unordered_map>
 #include <vector>
 
 #include "SeqData.hpp"
 #include "Quartet.hpp"
 #include "qcf.hpp"
+
+Quartet::Quartet(std::string i, std::string j, std::string k, std::string l, SeqData* seq){
+  A = seq->seqIndex[i], B = seq->seqIndex[j],
+  C = seq->seqIndex[k], D = seq->seqIndex[l];
+  hapA = i, hapB = j,
+  hapC = k, hapD = l;
+  seqPtr = seq;
+  makeIndexVec();
+}
 
 void Quartet::getCountMatrices(std::vector<int> &ix){
   assert(ix.size() == seqPtr->nSites);
@@ -76,7 +86,7 @@ std::vector<double> Quartet::eval(std::vector<int> &vec){
   for(uint i = 0; i < 4; i++){
     for(uint j = 0; j < 4; j++){
       for(uint k = 0; k < 4; k++){
-        for(uint l = 0; l< 4; l++){
+        for(uint l = 0; l < 4; l++){
           if(ABCD[i * 4 + j][k * 4 + l] == ABCD[i * 4 + j][l * 4 + k]){
             scores[0] += 1.0;
           }

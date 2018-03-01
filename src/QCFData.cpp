@@ -21,7 +21,6 @@ QCFData::QCFData(int c, char* v[]){
   _checkCommandLineInput();
   _parseSeqsFile();
   _parseMap();
-  std::unique_ptr<QCFTable> qcfs(new QCFTable(_nCk(nHaps, four)));
 }
 
 void QCFData::_parseCommandLine(int ac, char* av[]){
@@ -157,12 +156,5 @@ std::vector<SeqData> QCFData::get_seqs(){
     SeqData seq(seqFiles[s], this);
     seqs.push_back(seq);
   }
-  /*std::string t = "test.txt";
-  SeqData seq1(t, this);
-  SeqData seq2(t, this);
-  SeqData seq3(t, this);
-  seqs.push_back(seq1);
-  seqs.push_back(seq2);
-  seqs.push_back(seq3);*/
   return seqs;
 }
