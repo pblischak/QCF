@@ -9,3 +9,6 @@ before_install:
 install: make CXX=g++-4.9 && sudo make install
 
 script: make test
+
+notifications:
+  email: false

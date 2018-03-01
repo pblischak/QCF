@@ -24,7 +24,7 @@ clean :
 	@rm -i $(OBJ) $(EXE)
 
 test :
-	@cd tests; qcf -i genes.txt -m maps.txt
+	@cd tests; qcf -i genes.txt -m map.txt
 
 install :
 	@printf "\n Copying executable to /usr/local/bin...\n\n"
