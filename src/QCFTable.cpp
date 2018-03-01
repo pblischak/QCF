@@ -53,7 +53,6 @@ uint QCFTable::findIndex(uint i, uint j, uint k, uint l){
 }
 
 void QCFTable::write(std::string pfx){
-  std::cout << "Did we get here?" << std::endl;
   std::ofstream qcfStream;
   qcfStream.open(pfx+"-qcf.txt", std::ios::out | std::ios::app);
   if(qcfStream.is_open()){

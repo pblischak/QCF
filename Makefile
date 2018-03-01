@@ -10,7 +10,7 @@ OBJ = src/Bootstrap.o \
 CXX = g++
 CXXFLAGS = -Wall -O3 -g -std=c++11
 
-.PHONY : clean install uninstall
+.PHONY : clean test install uninstall
 
 $(EXE) : $(OBJ)
 	$(CXX) $(CXXFLAGS) -o $(EXE) $^
@@ -22,6 +22,9 @@ $(OBJ) : %.o: %.cpp
 clean :
 	@printf "\n Removing object (*.o) files and executable...\n\n"
 	@rm -i $(OBJ) $(EXE)
+
+test :
+	@cd tests; ../qcf -i genes.txt -m maps.txt
 
 install :
 	@printf "\n Copying executable to /usr/local/bin...\n\n"

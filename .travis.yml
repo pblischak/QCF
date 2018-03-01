@@ -1,0 +1,11 @@
+sudo: true
+language: cpp
+
+before_install:
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+  - sudo apt-get update -qq
+  - sudo apt-get install g++-4.9 -y -qq
+
+install: make CXX=g++-4.9
+
+script: make test
