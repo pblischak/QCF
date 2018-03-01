@@ -6,6 +6,6 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install g++-4.9 -y -qq
 
-install: make CXX=g++-4.9
+install: make CXX=g++-4.9 && sudo make install
 
 script: make test
