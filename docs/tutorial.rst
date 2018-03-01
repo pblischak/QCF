@@ -33,7 +33,7 @@ available in the ``example/`` folder in the
   # Aside:
   # Making the gene list file can be done using
   # the following code within a terminal.
-  for gene in genes/*.phy; do printf $gene"\n"; done > geneFiles.txt
+  ls -1 *.phy > geneFiles.txt
 
 .. code:: bash
 

@@ -9,10 +9,10 @@
 #include <utility>
 #include <vector>
 
+#include "qcf.hpp"
 #include "SeqData.hpp"
 #include "QCFData.hpp"
 #include "Quartet.hpp"
-#include "qcf.hpp"
 
 void SeqData::readPhylip(){
   std::ifstream phyStream(file_name);

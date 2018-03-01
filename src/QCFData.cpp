@@ -9,6 +9,7 @@
 #include <fstream>
 #include <sstream>
 
+#include "qcf.hpp"
 #include "QCFData.hpp"
 #include "SeqData.hpp"
 #include "Quartet.hpp"
