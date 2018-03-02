@@ -24,7 +24,10 @@ clean :
 	@rm -i $(OBJ) $(EXE)
 
 test :
+	@printf "Running data in folder 'tests/'\n"
 	@cd tests; qcf -i genes.txt -m map.txt
+	@printf "\n\nRunning data in folder 'example/'\n"
+	@cd example; qcf -i genes.txt -m map.txt
 
 install :
 	@printf "\n Copying executable to /usr/local/bin...\n\n"

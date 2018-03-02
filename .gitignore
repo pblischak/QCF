@@ -6,3 +6,4 @@ tests/*.txt
 !genes.txt
 !map.txt
 seedms
+*-qcf.txt
