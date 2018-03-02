@@ -47,7 +47,7 @@ uint QCFTable::findIndex(uint i, uint j, uint k, uint l){
     }
   }
   if(res == -1){
-    std::cout << "Shit!" << std::endl;
+    std::cout << "Bad index!" << std::endl;
   }
   return res;
 }
@@ -56,7 +56,7 @@ void QCFTable::write(std::string pfx){
   std::ofstream qcfStream;
   qcfStream.open(pfx+"-qcf.txt", std::ios::out | std::ios::app);
   if(qcfStream.is_open()){
-    qcfStream << "\"t1\",\"t2\",\"t3\",\"t4\",\"CF12_34\",\"CF13_24\",\"CF14_23\"" << std::endl;
+    qcfStream << "taxon1,taxon2,taxon3,taxon4,CF12.34,CF13.24,CF14.23" << std::endl;
   } else {
     std::cerr << "ERROR: Could not open outfile: " << pfx << "-qcf.txt.\n" << std::endl;
     exit(EXIT_FAILURE);
@@ -77,8 +77,8 @@ void QCFTable::write(std::string pfx){
           cf12_34 /= cfSum;
           cf13_24 /= cfSum;
           cf14_23 /= cfSum;
-          qcfStream << "\"" << qcfPtr->taxa[i] << "\",\"" << qcfPtr->taxa[j] << "\",\""
-                    << qcfPtr->taxa[k] << "\",\"" << qcfPtr->taxa[l] << "\","
+          qcfStream << qcfPtr->taxa[i] << "," << qcfPtr->taxa[j] << ","
+                    << qcfPtr->taxa[k] << "," << qcfPtr->taxa[l] << ","
                     << cf12_34 << "," << cf13_24 << "," << cf14_23 << std::endl;
         }
       }
