@@ -90,6 +90,10 @@ std::vector<uint> SeqData::orderHaps(uint i, uint j, uint k, uint l){
   pairs.push_back(std::make_pair(three,k));
   pairs.push_back(std::make_pair(four,l));
   std::sort(pairs.begin(), pairs.end());
+  /*std::cerr << "{" << pairs[0].first << "," << haps[pairs[0].second] << " : "
+                   << pairs[1].first << "," << haps[pairs[1].second] << " : "
+                   << pairs[2].first << "," << haps[pairs[2].second] << " : "
+                   << pairs[3].first << "," << haps[pairs[3].second] << "}" << std::endl;*/
   res = {pairs[0].second,
          pairs[1].second,
          pairs[2].second,

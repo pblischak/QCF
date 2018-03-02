@@ -1,3 +1,4 @@
+.DS_Store
 qcf
 src/*.o
 *~
@@ -6,4 +7,6 @@ tests/*.txt
 !genes.txt
 !map.txt
 seedms
-*-qcf.txt
+*-qcf.*
+*.tre
+*RAxML*

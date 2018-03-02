@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <vector>
 
+#include "QCFData.hpp"
 #include "SeqData.hpp"
 #include "Quartet.hpp"
 #include "qcf.hpp"
@@ -14,6 +15,10 @@ Quartet::Quartet(std::string i, std::string j, std::string k, std::string l, Seq
   C = seq->seqIndex[k], D = seq->seqIndex[l];
   hapA = i, hapB = j,
   hapC = k, hapD = l;
+  /*std::cerr << hapA << ":" << A << "\t"
+            << hapB << ":" << B << "\t"
+            << hapC << ":" << C << "\t"
+            << hapD << ":" << D << std::endl;*/
   seqPtr = seq;
   makeIndexVec();
 }
@@ -118,7 +123,7 @@ std::vector<double> Quartet::getWeights(std::vector<double> &vec){
   } else if(vec[1] == vec[2] && vec[1] > vec[0]){
     res = {0.0, 0.5, 0.5};
   } else {
-    for(uint i = 1; i< 3; i++){
+    for(uint i = 0; i < 3; i++){
       if(vec[i] > maxVal){
         maxIndex = i;
         maxVal   = vec[i];
@@ -126,6 +131,12 @@ std::vector<double> Quartet::getWeights(std::vector<double> &vec){
     }
     res[maxIndex] += 1.0;
   }
+  /*std::cerr << seqPtr->qcfPtr->hap2tax[hapA] << ","
+            << seqPtr->qcfPtr->hap2tax[hapB] << ","
+            << seqPtr->qcfPtr->hap2tax[hapC] << ","
+            << seqPtr->qcfPtr->hap2tax[hapD] << ":\t";
+  std::cerr << "0: " << vec[0] << "  1: " << vec[1] << "  2: " << vec[2] << "  max: "
+            << maxIndex << "," << res[0] << "," << res[1] << ","<< res[2] << std::endl;*/
   return res;
 }
 

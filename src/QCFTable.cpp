@@ -54,11 +54,11 @@ uint QCFTable::findIndex(uint i, uint j, uint k, uint l){
 
 void QCFTable::write(std::string pfx){
   std::ofstream qcfStream;
-  qcfStream.open(pfx+"-qcf.txt", std::ios::out | std::ios::app);
+  qcfStream.open(pfx+"-qcf.CFs.csv", std::ios::out | std::ios::app);
   if(qcfStream.is_open()){
     qcfStream << "taxon1,taxon2,taxon3,taxon4,CF12.34,CF13.24,CF14.23" << std::endl;
   } else {
-    std::cerr << "ERROR: Could not open outfile: " << pfx << "-qcf.txt.\n" << std::endl;
+    std::cerr << "ERROR: Could not open outfile: " << pfx << "-qcf.CFs.csv.\n" << std::endl;
     exit(EXIT_FAILURE);
   }
   uint tmpIndex;
@@ -68,11 +68,17 @@ void QCFTable::write(std::string pfx){
         for(uint l = k+1; l < nTaxa; l++){
           tmpIndex = findIndex(i,j,k,l);
           double cf12_34 = 0.0, cf13_24 = 0.0, cf14_23 = 0.0, cfSum = 0.0;
+          //std::cerr << tmpIndex << "\t" << qcfPtr->taxa[i] << "\t" << qcfPtr->taxa[j] << "\t"
+          //          << qcfPtr->taxa[k] << "\t" << qcfPtr->taxa[l] << "\t";
           for(uint v = 0; v < values[tmpIndex].size(); v++){
+            //std::cerr << "{" << values[tmpIndex][v][0] << ","
+            //                 << values[tmpIndex][v][1] << ","
+            //                 << values[tmpIndex][v][2] << "}\t";
             cf12_34 += values[tmpIndex][v][0];
             cf13_24 += values[tmpIndex][v][1];
             cf14_23 += values[tmpIndex][v][2];
           }
+          //std::cerr << std::endl;
           cfSum = cf12_34 + cf13_24 + cf14_23;
           cf12_34 /= cfSum;
           cf13_24 /= cfSum;

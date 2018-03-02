@@ -20,7 +20,7 @@ $(OBJ) : %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 clean :
-	@printf "\n Removing object (*.o) files and executable...\n\n"
+	@printf "\nRemoving object (*.o) files and executable...\n\n"
 	@rm -i $(OBJ) $(EXE)
 
 test :
@@ -30,9 +30,9 @@ test :
 	@cd example; qcf -i genes.txt -m map.txt
 
 install :
-	@printf "\n Copying executable to /usr/local/bin...\n\n"
+	@printf "\nCopying executable to /usr/local/bin...\n\n"
 	@cp $(EXE) /usr/local/bin
-	@printf " To uninstall, type: sudo make uninstall\n\n"
+	@printf "To uninstall, type: sudo make uninstall\n\n"
 
 uninstall :
 	@printf "\n Removing executable from /usr/local/bin...\n\n"
