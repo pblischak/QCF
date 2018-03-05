@@ -1,6 +1,10 @@
 #ifndef QCFDATA_HPP
 #define QCFDATA_HPP
 
+#include <vector>
+#include <unordered_map>
+#include <string>
+
 /* Forward declarations of classes. */
 class SeqData;
 class Quartet;

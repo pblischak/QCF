@@ -1,6 +1,9 @@
 #ifndef QUARTET_HPP
 #define QUARTET_HPP
 
+#include <vector>
+#include <string>
+
 class SeqData;
 
 class Quartet {

@@ -1,6 +1,8 @@
 #ifndef QCFTABLE_HPP
 #define QCFTABLE_HPP
 
+#include <vector>
+#include <string>
 /* Helper class: QCFTable
    The table is a 3-dimensional ragged array.
    Each row is a taxon-level quartet indexed by the order

@@ -1,8 +1,6 @@
 #include <iostream>
-#include <string>
 #include <cstring>
 #include <vector>
-#include <unordered_map>
 
 #include "qcf.hpp"
 #include "QCFTable.hpp"
@@ -26,7 +24,7 @@ int main(int argc, char* argv[]){
   }
 
   if(strcmp(argv[1],"-V") == 0 || strcmp(argv[1],"--version") == 0){
-    std::cerr << "\nThis is QCF version " << Version << " (" << Date << ").\n" << std::endl;
+    std::cerr << "\nThis is QCF version " << VERSION << " (" << DATE << ").\n" << std::endl;
     exit(EXIT_SUCCESS);
   }
 

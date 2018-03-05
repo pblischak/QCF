@@ -1,6 +1,8 @@
 #ifndef BOOTSTRAP_HPP
 #define BOOTSTRAP_HPP
 
+#include <vector>
+
 class Quartet;
 class MbRandom;
 

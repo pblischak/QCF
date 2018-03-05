@@ -2,12 +2,8 @@
 #include <cstring>
 #include <fstream>
 #include <functional>
-#include <iostream>
-#include <string>
 #include <stdlib.h>
-#include <unordered_map>
 #include <utility>
-#include <vector>
 
 #include "qcf.hpp"
 #include "SeqData.hpp"

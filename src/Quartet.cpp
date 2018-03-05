@@ -2,10 +2,7 @@
 #include <iostream>
 #include <iterator>
 #include <algorithm>
-#include <unordered_map>
-#include <vector>
 
-#include "QCFData.hpp"
 #include "SeqData.hpp"
 #include "Quartet.hpp"
 #include "qcf.hpp"

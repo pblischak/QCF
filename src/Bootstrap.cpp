@@ -1,13 +1,9 @@
-#include <vector>
-#include <string>
-#include <iostream>
-#include <unordered_map>
-
+#include "qcf.hpp"
 #include "SeqData.hpp"
 #include "Quartet.hpp"
 #include "MbRandom.hpp"
 #include "Bootstrap.hpp"
-#include "qcf.hpp"
+
 
 Bootstrap::Bootstrap(int &nreps){
   reps = nreps;

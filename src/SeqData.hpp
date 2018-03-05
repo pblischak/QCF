@@ -1,6 +1,11 @@
 #ifndef SEQDATA_HPP
 #define SEQDATA_HPP
 
+#include <vector>
+#include <string>
+#include <unordered_map>
+#include <iostream>
+
 class QCFData;
 class Quartet;
 
