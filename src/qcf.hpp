@@ -2,7 +2,7 @@
 #define QCF_HPP
 
 /* Version info. */
-const std::string Version = "0.1.0a";
+const std::string Version = "0.1.1a";
 const std::string Date    = "March 2018";
 
 using uint = unsigned int;
