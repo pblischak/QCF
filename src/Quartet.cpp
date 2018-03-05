@@ -92,19 +92,66 @@ std::vector<double> Quartet::eval(std::vector<int> &vec){
     for(uint j = 0; j < 4; j++){
       for(uint k = 0; k < 4; k++){
         for(uint l = 0; l < 4; l++){
-          if(ABCD[i * 4 + j][k * 4 + l] == ABCD[i * 4 + j][l * 4 + k]){
+          /*if(i == j && k != l){
+            scores[0] += ABCD[i * 4 + j][k * 4 + l];
+            scores[1] += ACBD[i * 4 + j][k * 4 + l];
+            scores[2] += ADBC[i * 4 + j][k * 4 + l];
+          }*/
+          if(ABCD[i * 4 + j][k * 4 + l] == ABCD[i * 4 + j][l * 4 + k] &&
+             ABCD[i * 4 + j][k * 4 + l] != ABCD[j * 4 + i][k * 4 + l]){
             scores[0] += 1.0;
           }
-          if(ACBD[i * 4 + j][k * 4 + l] == ACBD[i * 4 + j][l * 4 + k]){
+          if(ACBD[i * 4 + j][k * 4 + l] == ACBD[i * 4 + j][l * 4 + k] &&
+             ACBD[i * 4 + j][k * 4 + l] != ACBD[j * 4 + i][k * 4 + l]){
             scores[1] += 1.0;
           }
-          if(ADBC[i * 4 + j][k * 4 + l] == ADBC[i * 4 + j][l * 4 + k]){
+          if(ADBC[i * 4 + j][k * 4 + l] == ADBC[i * 4 + j][l * 4 + k] &&
+             ADBC[i * 4 + j][k * 4 + l] != ADBC[j * 4 + i][k * 4 + l]){
             scores[2] += 1.0;
           }
         }
       }
     }
   }
+  weights = getWeights(scores);
+  return weights;
+}
+
+std::vector<double> Quartet::eval2(std::vector<int> &vec){
+  std::vector<double> scores(3,0.0);
+  std::vector<double> weights(3,0.0);
+  std::vector<int> ix;
+  double mAB = 0.0, mAC = 0.0, mAD = 0.0, mBC = 0.0, mBD = 0.0, mCD = 0.0;
+  if(vec.size() == 0){
+    ix = index;
+  } else {
+    ix = vec;
+  }
+  assert(ix.size() == seqPtr->nSites);
+  for(std::vector<int>::iterator s = ix.begin();
+      s != ix.end(); s++){
+    if(seqPtr->dna[A][*s] < 4 &&
+       seqPtr->dna[B][*s] < 4 &&
+       seqPtr->dna[C][*s] < 4 &&
+       seqPtr->dna[D][*s] < 4){
+      if(seqPtr->dna[A][*s] == seqPtr->dna[B][*s]) {mAB += 1.0;}
+      if(seqPtr->dna[A][*s] == seqPtr->dna[C][*s]) {mAC += 1.0;}
+      if(seqPtr->dna[A][*s] == seqPtr->dna[D][*s]) {mAD += 1.0;}
+      if(seqPtr->dna[B][*s] == seqPtr->dna[C][*s]) {mBC += 1.0;}
+      if(seqPtr->dna[B][*s] == seqPtr->dna[D][*s]) {mBD += 1.0;}
+      if(seqPtr->dna[C][*s] == seqPtr->dna[D][*s]) {mCD += 1.0;}
+    } else if(!ignore_amb_sites){
+      mAB += resolveAmbiguity2(seqPtr->dna[A][*s], seqPtr->dna[B][*s]);
+      mAC += resolveAmbiguity2(seqPtr->dna[A][*s], seqPtr->dna[C][*s]);
+      mAD += resolveAmbiguity2(seqPtr->dna[A][*s], seqPtr->dna[D][*s]);
+      mBC += resolveAmbiguity2(seqPtr->dna[B][*s], seqPtr->dna[C][*s]);
+      mBD += resolveAmbiguity2(seqPtr->dna[B][*s], seqPtr->dna[D][*s]);
+      mCD += resolveAmbiguity2(seqPtr->dna[C][*s], seqPtr->dna[D][*s]);
+    }
+  }
+  scores[0] = mAB + mCD - mAC - mAD - mBC - mBD;
+  scores[1] = mAC + mBD - mAB - mAD - mBC - mCD;
+  scores[2] = mAD + mBC - mAB - mAC - mBD - mCD;
   weights = getWeights(scores);
   return weights;
 }

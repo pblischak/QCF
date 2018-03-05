@@ -11,6 +11,8 @@ public:
   ~Quartet(){};
 
   std::vector<double> eval(std::vector<int> &vec);
+  std::vector<double> eval2(std::vector<int> &vec);
+  double resolveAmbiguity2(const int& a, const int& b);
   int A, B, C, D;
   std::string hapA, hapB, hapC, hapD;
   bool resolved = 0;
@@ -50,4 +52,21 @@ private:
   void makeIndexVec();
 };
 
+inline double Quartet::resolveAmbiguity2(const int& a, const int& b){
+  double res = 0.0;
+  bool match = 0;
+  for(uint i = 0; i < baseLookup[a].size(); i++){
+    for(uint j = 0; j < baseLookup[b].size(); j++){
+      if(baseLookup[a][i] == baseLookup[b][j]) {match = 1;}
+    }
+  }
+  if(match){
+    double size1 = baseLookup[a].size();
+    double size2 = baseLookup[b].size();
+    res = 1.0 / (size1 * size2);
+  } else {
+    res = 0.0;
+  }
+  return res;
+}
 #endif //QUARTET_HPP
