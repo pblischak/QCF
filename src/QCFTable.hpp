@@ -31,16 +31,16 @@ public:
   std::vector<QCFEntry> lookup;
   std::vector< std::vector< std::vector<double> > > values;
   //std::vector< std::vector < std::vector<double> > > qtab;
-  int nCk(const int& n, int& k);
+  int nCk(const uint& n, uint& k);
   void addValue(uint i, uint j, uint k, uint l, std::vector<double> val);
   void write(std::string pfx);
   uint findIndex(uint i, uint j, uint k, uint l);
-  int four = 4, nTaxa, nQrts;
+  uint four = 4, nTaxa, nQrts;
   QCFData* qcfPtr;
 };
 
 /* Calculate binomial coefficient. */
-inline int QCFTable::nCk(const int& n, int& k){
+inline int QCFTable::nCk(const uint& n, uint& k){
   int res = 1;
   if(k > n - k)
     k = n - k;

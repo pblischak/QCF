@@ -8,7 +8,8 @@ OBJ = src/Bootstrap.o \
 			src/qcf.o
 
 CXX = g++
-CXXFLAGS = -Wall -O3 -g -std=c++11
+CXXFLAGS = -Wall -g -O3 -std=c++11
+#CXXFLAGS += -pedantic -Wextra
 
 .PHONY : clean test install uninstall
 
@@ -21,7 +22,7 @@ $(OBJ) : %.o: %.cpp
 
 clean :
 	@printf "\nRemoving object (*.o) files and executable...\n\n"
-	@rm -i $(OBJ) $(EXE)
+	@rm $(OBJ) $(EXE)
 
 test :
 	@printf "Running data in folder 'tests/'\n"

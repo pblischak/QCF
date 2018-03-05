@@ -23,7 +23,7 @@ public:
   std::unordered_map<std::string, uint> seqIndex;
   std::vector<uint> orderHaps(uint i, uint j, uint k, uint l);
   QCFData* qcfPtr;
-  int nSeqs, nSites;
+  uint nSeqs, nSites;
   bool skip = 0;
 private:
   int convert(char str);

@@ -3,9 +3,9 @@
 #include <iterator>
 #include <algorithm>
 
+#include "qcf.hpp"
 #include "SeqData.hpp"
 #include "Quartet.hpp"
-#include "qcf.hpp"
 
 Quartet::Quartet(std::string i, std::string j, std::string k, std::string l, SeqData* seq){
   A = seq->seqIndex[i], B = seq->seqIndex[j],

@@ -13,7 +13,7 @@ public:
   std::vector<double> operator()(Quartet &qrt);
   void randomVector(int low, int high, std::vector<int> &vec);
   MbRandom* r;
-  int reps = 1;
+  uint reps = 1;
 };
 
 #endif //BOOTSTRAP_HPP
