@@ -4,7 +4,7 @@ QCF: Estimating Quartet Concordance Factors
 ===========================================
 
 `Read the Docs <http://quartet-cf.rtfd.io/>`__
-----------------------------------------------
+==============================================
 
 Installation
 ~~~~~~~~~~~~
@@ -18,12 +18,11 @@ Mac users will also need to have the Xcode
 
 .. code:: bash
 
-  # Cloning, compiling, testing, and installing QCF
-  git clone https://github.com/pblischak/QCF.git      # 1. Clone the repo from GitHub
-  cd QCF                                              # 2. cd into the QCF/ folder
-  make                                                # 3. compile the qcf executable
-  make test                                           # 4. test that executable works
-  sudo make install                                   # 5. copy executable to /usr/local/bin
+  git clone https://github.com/pblischak/QCF.git        # 1. Clone the repo from GitHub
+  cd QCF                                                # 2. cd into the QCF/ folder
+  make                                                  # 3. compile the qcf executable
+  make test                                             # 4. test that the executable works
+  sudo make install                                     # 5. copy executable to /usr/local/bin
 
 Usage
 ~~~~~
