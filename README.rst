@@ -8,7 +8,7 @@ QCF: Estimating Quartet Concordance Factors
   for yourself, please feel free to do so. We would appreciate it if you
   report any strange behavior or bad results as an issue. Thanks!
 
-`Read the Docs <http://quartet-cf.rtfd.io/>`__
+`Read the Docs <http://qcf.readthedocs.io/>`__
 ==============================================
 
 Installation
@@ -61,11 +61,11 @@ If you have a problem while running QCF, and you think it may be a bug, please c
 .. |Build Status| image:: https://travis-ci.com/pblischak/QCF.svg?token=3UtCuy4QMGzzqmrdSwV2&branch=master
    :target: https://travis-ci.com/pblischak/QCF
 
-.. |Documentation| image:: http://readthedocs.org/projects/hybridization-detection/badge/?version=latest
-   :target: http://quartet-cf.readthedocs.io
+.. |Documentation| image:: http://readthedocs.org/projects/qcf/badge/?version=latest
+   :target: http://qcf.readthedocs.io
 
 .. |Gitter| image:: https://badges.gitter.im/Join%20Chat.svg
-   :target: https://gitter.im/pblischak-QCF/Lobby
+   :target: https://gitter.im/quartet-cf/Lobby
 
 .. |QCF Issues| image:: https://img.shields.io/badge/QCF-Issues-blue.svg
    :target: https://github.com/pblischak/QCF/issues
