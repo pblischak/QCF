@@ -3,11 +3,9 @@
 QCF: Estimating Quartet Concordance Factors
 ===========================================
 
-.. warning::
-
-  This is an alpha test version of QCF. We are still verifying that it works,
+  **WARNING**: This is an alpha test version of QCF. We are still verifying that it works,
   and cannot guarantee that it will function correctly. If you wish to test it
-  for yourself, please feel free to do so. We would also appreciate it if you
+  for yourself, please feel free to do so. We would appreciate it if you
   report any strange behavior or bad results as an issue. Thanks!
 
 `Read the Docs <http://quartet-cf.rtfd.io/>`__
