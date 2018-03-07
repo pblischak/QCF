@@ -1,7 +1,6 @@
 #include "qcf.hpp"
 #include "SeqData.hpp"
 #include "Quartet.hpp"
-#include "MbRandom.hpp"
 #include "Bootstrap.hpp"
 
 
@@ -16,7 +15,7 @@ std::vector<double> Bootstrap::operator()(Quartet &qrt){
   double overallSum;
   std::vector<int> ix(qrt.seqPtr->nSites, 0);
   std::vector< std::vector<double> > boot_results(reps, std::vector<double>(3, 0.0));
-  for(uint i = 0; i < reps; i++){
+  for(int i = 0; i < reps; i++){
     randomVector(0, qrt.seqPtr->nSites - 1, ix);
     boot_results[i] = qrt.eval2(ix);
     weightSums[0] += boot_results[i][0];
@@ -31,7 +30,7 @@ std::vector<double> Bootstrap::operator()(Quartet &qrt){
 }
 
 void Bootstrap::randomVector(int low, int high, std::vector<int> &vec){
-  for(uint i = 0; i < vec.size(); i++){
+  for(int i = 0; i < vec.size(); i++){
     vec[i] = r->sampleInteger(low,high);
   }
 }

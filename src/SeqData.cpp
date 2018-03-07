@@ -13,13 +13,13 @@
 void SeqData::readPhylip(){
   std::ifstream phyStream(file_name);
   std::string val1, val2;
-  uint row = 0;
+  int row = 0;
   if(phyStream.is_open()){
     phyStream >> val1 >> val2;
     nSeqs = atoi(val1.c_str());
     nSites = atoi(val2.c_str());
     dna.resize(nSeqs);
-    for(uint i = 0; i < nSeqs; i++){
+    for(int i = 0; i < nSeqs; i++){
       dna[i].resize(nSites);
     }
     while(phyStream >> val1 >> val2){
@@ -32,7 +32,7 @@ void SeqData::readPhylip(){
         haps.push_back(val1);
         seqIndex.insert({val1, row});
       }
-      for(uint s = 0; s < val2.length(); s++){
+      for(int s = 0; s < val2.length(); s++){
         dna[row][s] = convert(val2[s]);
       }
       row++;
@@ -44,13 +44,13 @@ void SeqData::readPhylip(){
 }
 
 std::vector<Quartet> SeqData::get_quartets(){
-  uint H = haps.size();
-  std::vector<uint> ordered;
+  int H = haps.size();
+  std::vector<int> ordered;
   std::vector<Quartet> qrts;
-  for(uint i = 0; i < H - 3; i++){
-    for(uint j = i + 1; j < H - 2; j++){
-      for(uint k = j + 1; k < H - 1; k++){
-        for(uint l = k + 1; l < H; l++){
+  for(int i = 0; i < H - 3; i++){
+    for(int j = i + 1; j < H - 2; j++){
+      for(int k = j + 1; k < H - 1; k++){
+        for(int l = k + 1; l < H; l++){
           if(qcfPtr->hap2tax[haps[i]] == qcfPtr->hap2tax[haps[j]] ||
              qcfPtr->hap2tax[haps[i]] == qcfPtr->hap2tax[haps[k]] ||
              qcfPtr->hap2tax[haps[i]] == qcfPtr->hap2tax[haps[l]] ||
@@ -74,13 +74,13 @@ std::vector<Quartet> SeqData::get_quartets(){
   return qrts;
 }
 
-std::vector<uint> SeqData::orderHaps(uint i, uint j, uint k, uint l){
-  uint one   = qcfPtr->hap2tax[haps[i]],
-       two   = qcfPtr->hap2tax[haps[j]],
-       three = qcfPtr->hap2tax[haps[k]],
-       four  = qcfPtr->hap2tax[haps[l]];
-  std::vector<uint> res(4);
-  std::vector< std::pair<uint, uint> > pairs;
+std::vector<int> SeqData::orderHaps(int i, int j, int k, int l){
+  int one   = qcfPtr->hap2tax[haps[i]],
+      two   = qcfPtr->hap2tax[haps[j]],
+      three = qcfPtr->hap2tax[haps[k]],
+      four  = qcfPtr->hap2tax[haps[l]];
+  std::vector<int> res(4);
+  std::vector< std::pair<int, int> > pairs;
   pairs.push_back(std::make_pair(one,i));
   pairs.push_back(std::make_pair(two,j));
   pairs.push_back(std::make_pair(three,k));

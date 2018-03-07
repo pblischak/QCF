@@ -117,7 +117,7 @@ void QCFData::_parseMap(){
         std::cerr << "Haplotype names could not be split (should be comma delimted).\n" << std::endl;
         exit(EXIT_FAILURE);
       }
-      for(uint i = 0; i < str2.size(); i++){
+      for(int i = 0; i < str2.size(); i++){
         hap2tax.insert({str2[i], taxonIndex});
         nHaps++;
       }
@@ -150,7 +150,7 @@ std::vector<SeqData> QCFData::get_seqs(){
 
   */
   std::vector<SeqData> seqs;
-  for(uint s = 0; s < seqFiles.size(); s++){
+  for(int s = 0; s < seqFiles.size(); s++){
     SeqData seq(seqFiles[s], this);
     seqs.push_back(seq);
   }

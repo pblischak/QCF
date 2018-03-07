@@ -85,10 +85,10 @@ std::vector<double> Quartet::eval(std::vector<int> &vec){
   } else {
     getCountMatrices(vec);
   }
-  for(uint i = 0; i < 4; i++){
-    for(uint j = 0; j < 4; j++){
-      for(uint k = 0; k < 4; k++){
-        for(uint l = 0; l < 4; l++){
+  for(int i = 0; i < 4; i++){
+    for(int j = 0; j < 4; j++){
+      for(int k = 0; k < 4; k++){
+        for(int l = 0; l < 4; l++){
           /*if(i == j && k != l){
             scores[0] += ABCD[i * 4 + j][k * 4 + l];
             scores[1] += ACBD[i * 4 + j][k * 4 + l];
@@ -167,7 +167,7 @@ std::vector<double> Quartet::getWeights(std::vector<double> &vec){
   } else if(vec[1] == vec[2] && vec[1] > vec[0]){
     res = {0.0, 0.5, 0.5};
   } else {
-    for(uint i = 0; i < 3; i++){
+    for(int i = 0; i < 3; i++){
       if(vec[i] > maxVal){
         maxIndex = i;
         maxVal   = vec[i];
@@ -185,7 +185,7 @@ std::vector<double> Quartet::getWeights(std::vector<double> &vec){
 }
 
 void Quartet::makeIndexVec(){
-  for(uint s = 0; s < seqPtr->nSites; s++){
+  for(int s = 0; s < seqPtr->nSites; s++){
     index.push_back(s);
   }
 }

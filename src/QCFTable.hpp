@@ -17,11 +17,11 @@ class QCFData;
 
 class QCFEntry {
 public:
-  QCFEntry(uint i, uint j, uint k, uint l, uint idx){key = {i,j,k,l};
+  QCFEntry(int i, int j, int k, int l, int idx){key = {i,j,k,l};
                                                      index = idx;}
   ~QCFEntry(){};
-  std::vector<uint> key;
-  uint index;
+  std::vector<int> key;
+  int index;
 };
 
 class QCFTable {
@@ -31,16 +31,16 @@ public:
   std::vector<QCFEntry> lookup;
   std::vector< std::vector< std::vector<double> > > values;
   //std::vector< std::vector < std::vector<double> > > qtab;
-  int nCk(const uint& n, uint& k);
-  void addValue(uint i, uint j, uint k, uint l, std::vector<double> val);
+  int nCk(const int& n, int& k);
+  void addValue(int i, int j, int k, int l, std::vector<double> val);
   void write(std::string pfx);
-  uint findIndex(uint i, uint j, uint k, uint l);
-  uint four = 4, nTaxa, nQrts;
+  int findIndex(int i, int j, int k, int l);
+  int four = 4, nTaxa, nQrts;
   QCFData* qcfPtr;
 };
 
 /* Calculate binomial coefficient. */
-inline int QCFTable::nCk(const uint& n, uint& k){
+inline int QCFTable::nCk(const int& n, int& k){
   int res = 1;
   if(k > n - k)
     k = n - k;

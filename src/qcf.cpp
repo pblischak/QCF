@@ -38,14 +38,14 @@ int main(int argc, char* argv[]){
     bootstrap = 1;
   }
   std::vector<SeqData> seqs = qcf.get_seqs();
-  for(uint s = 0; s < seqs.size(); s++){
+  for(int s = 0; s < seqs.size(); s++){
     if(seqs[s].skip){
       continue;
     }
     std::cout << "Analyzing gene " << s+1 << " (" << seqs[s].haps.size() << "): ";
     std::vector<Quartet> qrts = seqs[s].get_quartets();
     std::cout << qrts.size() << " quartets.\n";
-    for(uint q = 0; q < qrts.size(); q++){
+    for(int q = 0; q < qrts.size(); q++){
       if(bootstrap){
         res = boot(qrts[q]);
       } else {

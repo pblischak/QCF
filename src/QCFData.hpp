@@ -16,7 +16,7 @@ public:
   std::vector<SeqData> get_seqs();
   void map2qcf(Quartet &q);
   std::vector<std::string> taxa, seqFiles;
-  std::unordered_map<std::string, uint> hap2tax;
+  std::unordered_map<std::string, int> hap2tax;
   std::string infile = "none", mapfile = "none";
   int nTaxa = 0, nHaps = 0, bootReps = -999;
   bool quiet = 0;

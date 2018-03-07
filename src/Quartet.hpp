@@ -58,8 +58,8 @@ private:
 inline double Quartet::resolveAmbiguity2(const int& a, const int& b){
   double res = 0.0;
   bool match = 0;
-  for(uint i = 0; i < baseLookup[a].size(); i++){
-    for(uint j = 0; j < baseLookup[b].size(); j++){
+  for(int i = 0; i < baseLookup[a].size(); i++){
+    for(int j = 0; j < baseLookup[b].size(); j++){
       if(baseLookup[a][i] == baseLookup[b][j]) {match = 1;}
     }
   }

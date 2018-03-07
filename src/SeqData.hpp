@@ -20,10 +20,10 @@ public:
   std::string file_name;
   std::vector< std::vector<int> > dna;
   std::vector<std::string> haps;
-  std::unordered_map<std::string, uint> seqIndex;
-  std::vector<uint> orderHaps(uint i, uint j, uint k, uint l);
+  std::unordered_map<std::string, int> seqIndex;
+  std::vector<int> orderHaps(int i, int j, int k, int l);
   QCFData* qcfPtr;
-  uint nSeqs, nSites;
+  int nSeqs, nSites;
   bool skip = 0;
 private:
   int convert(char str);
