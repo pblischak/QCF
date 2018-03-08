@@ -9,7 +9,7 @@ OBJ = src/Bootstrap.o \
 
 CXX = g++
 CXXFLAGS = -Wall -g -O3 -std=c++11
-CXXFLAGS += -Wno-sign-compare
+#CXXFLAGS += -Wno-sign-compare
 #CXXFLAGS += -pedantic -Wextra
 
 .PHONY : clean test install uninstall
