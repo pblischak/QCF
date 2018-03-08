@@ -11,17 +11,17 @@
 #include "SeqData.hpp"
 #include "Quartet.hpp"
 
-QCFData::QCFData(int c, char* v[]){
+QCFData::QCFData(const int c, char* v[]){
   /*
 
   */
-  _parseCommandLine(c, v);
-  _checkCommandLineInput();
-  _parseSeqsFile();
-  _parseMap();
+  parseCommandLine_(c, v);
+  checkCommandLineInput_();
+  parseSeqsFile_();
+  parseMap_();
 }
 
-void QCFData::_parseCommandLine(int ac, char* av[]){
+void QCFData::parseCommandLine_(const int ac, char* av[]){
   /*
 
   */
@@ -54,7 +54,7 @@ void QCFData::_parseCommandLine(int ac, char* av[]){
   }
 }
 
-void QCFData::_checkCommandLineInput(){
+void QCFData::checkCommandLineInput_(){
   /*
 
   */
@@ -67,9 +67,10 @@ void QCFData::_checkCommandLineInput(){
     std::cerr << "\nMissing or invalid option for -m [--map]: " << mapfile << std::endl;
     errorCaught++;
   }
-  if(bootReps <= 0 && bootReps != -999){
+  if(bootReps < 0){
     std::cerr << "\nInvalid option for number of bootstrap replicates [-b,--bootstrap]: "
               << bootReps << std::endl;
+    errorCaught++;
   }
   if(errorCaught > 0){
     std::cerr << "** ERROR: " << errorCaught << " command line option(s) improperly specified. **\n" << std::endl;
@@ -77,7 +78,7 @@ void QCFData::_checkCommandLineInput(){
   }
 }
 
-void QCFData::_parseSeqsFile(){
+void QCFData::parseSeqsFile_(){
   /*
 
   */
@@ -93,7 +94,7 @@ void QCFData::_parseSeqsFile(){
   }
 }
 
-void QCFData::_parseMap(){
+void QCFData::parseMap_(){
   /*
 
   */
@@ -104,14 +105,14 @@ void QCFData::_parseMap(){
   char d1 = ':', d2 = ',';
   if(mapStream.is_open()){
     while(mapStream >> inString){
-      str1 = _splitString(inString, d1);
+      str1 = splitString_(inString, d1);
       if(str1.size() != 2){
         std::cerr << "\nError reading map file on line " << taxonIndex << "." << std::endl;
         std::cerr << "More than one \":\" present.\n" << std::endl;
         exit(EXIT_FAILURE);
       }
       taxa.push_back(str1[0]);
-      str2 = _splitString(str1[1], d2);
+      str2 = splitString_(str1[1], d2);
       if(str2.size() <= 0){
         std::cerr << "\nError reading map file on line " << taxonIndex << "." << std::endl;
         std::cerr << "Haplotype names could not be split (should be comma delimted).\n" << std::endl;
@@ -130,7 +131,7 @@ void QCFData::_parseMap(){
   }
 }
 
-std::vector<std::string> QCFData::_splitString(const std::string &s,
+std::vector<std::string> QCFData::splitString_(const std::string& s,
                                                char d){
   /*
   Split an input string (s) based on character delimeter (d).
@@ -145,7 +146,7 @@ std::vector<std::string> QCFData::_splitString(const std::string &s,
   return tokens;
 }
 
-std::vector<SeqData> QCFData::get_seqs(){
+std::vector<SeqData> QCFData::getSeqs(){
   /*
 
   */

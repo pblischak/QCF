@@ -7,7 +7,9 @@
 #include "SeqData.hpp"
 #include "Quartet.hpp"
 
-Quartet::Quartet(std::string i, std::string j, std::string k, std::string l, SeqData* seq){
+Quartet::Quartet(const std::string i, const std::string j,
+                 const std::string k, const std::string l,
+                 SeqData* seq){
   A = seq->seqIndex[i], B = seq->seqIndex[j],
   C = seq->seqIndex[k], D = seq->seqIndex[l];
   hapA = i, hapB = j,
@@ -17,10 +19,10 @@ Quartet::Quartet(std::string i, std::string j, std::string k, std::string l, Seq
             << hapC << ":" << C << "\t"
             << hapD << ":" << D << std::endl;*/
   seqPtr = seq;
-  makeIndexVec();
+  makeIndexVec_();
 }
 
-void Quartet::getCountMatrices(std::vector<int> &ix){
+void Quartet::getCountMatrices_(std::vector<int>& ix){
   assert(ix.size() == seqPtr->nSites);
   for(std::vector<int>::iterator s = ix.begin();
       s != ix.end(); s++){
@@ -35,18 +37,18 @@ void Quartet::getCountMatrices(std::vector<int> &ix){
       ADBC[seqPtr->dna[A][*s] * 4 + seqPtr->dna[D][*s]]
           [seqPtr->dna[B][*s] * 4 + seqPtr->dna[C][*s]] += 1.0;
     } else if(!ignore_amb_sites){
-      resolved = resolveAmbiguity(seqPtr->dna[A][*s],
-                                  seqPtr->dna[B][*s],
-                                  seqPtr->dna[C][*s],
-                                  seqPtr->dna[D][*s]);
+      resolved = resolveAmbiguity_(seqPtr->dna[A][*s],
+                                   seqPtr->dna[B][*s],
+                                   seqPtr->dna[C][*s],
+                                   seqPtr->dna[D][*s]);
     }
   }
 }
 
-bool Quartet::resolveAmbiguity(const int& one,
-                               const int& two,
-                               const int& three,
-                               const int& four){
+bool Quartet::resolveAmbiguity_(const int one,
+                                const int two,
+                                const int three,
+                                const int four){
   /* Check to see if any combination of three of the four taxa are ambiguous. */
   double denom = 0.0;
   if((one >= 4 && two   >= 4 && three >= 4) ||
@@ -77,13 +79,13 @@ bool Quartet::resolveAmbiguity(const int& one,
   return 1;
 }
 
-std::vector<double> Quartet::eval(std::vector<int> &vec){
+std::vector<double> Quartet::eval(std::vector<int>& vec){
   std::vector<double> scores(3,0.0);
   std::vector<double> weights(3,0.0);
   if(vec.size() == 0){
-    getCountMatrices(index);
+    getCountMatrices_(index);
   } else {
-    getCountMatrices(vec);
+    getCountMatrices_(vec);
   }
   for(int i = 0; i < 4; i++){
     for(int j = 0; j < 4; j++){
@@ -110,11 +112,11 @@ std::vector<double> Quartet::eval(std::vector<int> &vec){
       }
     }
   }
-  weights = getWeights(scores);
+  weights = getWeights_(scores);
   return weights;
 }
 
-std::vector<double> Quartet::eval2(std::vector<int> &vec){
+std::vector<double> Quartet::eval2(std::vector<int>& vec){
   std::vector<double> scores(3,0.0);
   std::vector<double> weights(3,0.0);
   std::vector<int> ix;
@@ -138,22 +140,22 @@ std::vector<double> Quartet::eval2(std::vector<int> &vec){
       if(seqPtr->dna[B][*s] == seqPtr->dna[D][*s]) {mBD += 1.0;}
       if(seqPtr->dna[C][*s] == seqPtr->dna[D][*s]) {mCD += 1.0;}
     } else if(!ignore_amb_sites){
-      mAB += resolveAmbiguity2(seqPtr->dna[A][*s], seqPtr->dna[B][*s]);
-      mAC += resolveAmbiguity2(seqPtr->dna[A][*s], seqPtr->dna[C][*s]);
-      mAD += resolveAmbiguity2(seqPtr->dna[A][*s], seqPtr->dna[D][*s]);
-      mBC += resolveAmbiguity2(seqPtr->dna[B][*s], seqPtr->dna[C][*s]);
-      mBD += resolveAmbiguity2(seqPtr->dna[B][*s], seqPtr->dna[D][*s]);
-      mCD += resolveAmbiguity2(seqPtr->dna[C][*s], seqPtr->dna[D][*s]);
+      mAB += resolveAmbiguity2_(seqPtr->dna[A][*s], seqPtr->dna[B][*s]);
+      mAC += resolveAmbiguity2_(seqPtr->dna[A][*s], seqPtr->dna[C][*s]);
+      mAD += resolveAmbiguity2_(seqPtr->dna[A][*s], seqPtr->dna[D][*s]);
+      mBC += resolveAmbiguity2_(seqPtr->dna[B][*s], seqPtr->dna[C][*s]);
+      mBD += resolveAmbiguity2_(seqPtr->dna[B][*s], seqPtr->dna[D][*s]);
+      mCD += resolveAmbiguity2_(seqPtr->dna[C][*s], seqPtr->dna[D][*s]);
     }
   }
   scores[0] = mAB + mCD - mAC - mAD - mBC - mBD;
   scores[1] = mAC + mBD - mAB - mAD - mBC - mCD;
   scores[2] = mAD + mBC - mAB - mAC - mBD - mCD;
-  weights = getWeights(scores);
+  weights = getWeights_(scores);
   return weights;
 }
 
-std::vector<double> Quartet::getWeights(std::vector<double> &vec){
+std::vector<double> Quartet::getWeights_(std::vector<double>& vec){
   std::vector<double> res(3,0.0);
   assert(vec.size() == 3);
   double maxVal = vec[0];
@@ -184,7 +186,7 @@ std::vector<double> Quartet::getWeights(std::vector<double> &vec){
   return res;
 }
 
-void Quartet::makeIndexVec(){
+void Quartet::makeIndexVec_(){
   for(int s = 0; s < seqPtr->nSites; s++){
     index.push_back(s);
   }

@@ -10,7 +10,7 @@
 #include "QCFData.hpp"
 #include "Quartet.hpp"
 
-void SeqData::readPhylip(){
+void SeqData::readPhylip_(){
   std::ifstream phyStream(file_name);
   std::string val1, val2;
   int row = 0;
@@ -24,7 +24,8 @@ void SeqData::readPhylip(){
     }
     while(phyStream >> val1 >> val2){
       if(qcfPtr->hap2tax.count(val1) == 0){
-        std::cerr << "\nThe haplotype name \'" << val1 << "\' is not present in the given map file." << std::endl;
+        std::cerr << "\nThe haplotype name \'" << val1
+                  << "\' is not present in the given map file." << std::endl;
         std::cerr << "Skipping this gene (" << file_name << ")...\n" << std::endl;
         skip = 1;
         return; // we'll just skip this locus
@@ -33,18 +34,19 @@ void SeqData::readPhylip(){
         seqIndex.insert({val1, row});
       }
       for(int s = 0; s < val2.length(); s++){
-        dna[row][s] = convert(val2[s]);
+        dna[row][s] = convert_(val2[s]);
       }
       row++;
     }
   } else {
-    std::cerr << "Problem reading in file " << file_name << ". Skipping..." << std::endl;
+    std::cerr << "Problem reading in file " << file_name
+              << ". Skipping..." << std::endl;
     skip = 1;
   }
 }
 
-std::vector<Quartet> SeqData::get_quartets(){
-  int H = haps.size();
+std::vector<Quartet> SeqData::getQuartets(){
+  const int H = haps.size();
   std::vector<int> ordered;
   std::vector<Quartet> qrts;
   for(int i = 0; i < H - 3; i++){
@@ -74,7 +76,8 @@ std::vector<Quartet> SeqData::get_quartets(){
   return qrts;
 }
 
-std::vector<int> SeqData::orderHaps(int i, int j, int k, int l){
+std::vector<int> SeqData::orderHaps(const int i, const int j,
+                                    const int k, const int l){
   int one   = qcfPtr->hap2tax[haps[i]],
       two   = qcfPtr->hap2tax[haps[j]],
       three = qcfPtr->hap2tax[haps[k]],

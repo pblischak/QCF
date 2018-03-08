@@ -8,22 +8,21 @@ class SeqData;
 
 class Quartet {
 public:
-  Quartet(std::string i, std::string j,
-          std::string k, std::string l,
+  Quartet(const std::string i, const std::string j,
+          const std::string k, const std::string l,
           SeqData *seq);
   ~Quartet(){};
 
-  std::vector<double> eval(std::vector<int> &vec);
-  std::vector<double> eval2(std::vector<int> &vec);
-  double resolveAmbiguity2(const int& a, const int& b);
+  std::vector<double> eval(std::vector<int>& vec);
+  std::vector<double> eval2(std::vector<int>& vec);
   int A, B, C, D;
   std::string hapA, hapB, hapC, hapD;
   bool resolved = 0;
   std::vector<int> index;
-  double ABCD[16][16] = {{0.0}},
-         ACBD[16][16] = {{0.0}},
-         ADBC[16][16] = {{0.0}};
-  const std::vector<std::vector<int> > baseLookup = { /* {A,G,C,T} == {0,1,2,3} */
+  std::vector< std::vector<double> > ABCD{16, std::vector<double>(16)};
+  std::vector< std::vector<double> > ACBD{16, std::vector<double>(16)};
+  std::vector< std::vector<double> > ADBC{16, std::vector<double>(16)};
+  const std::vector< std::vector<int> > baseLookup = { /* {A,G,C,T} == {0,1,2,3} */
     {0},
     {1},
     {2},
@@ -44,18 +43,18 @@ public:
   SeqData* seqPtr;
 
 private:
-  void getCountMatrices(std::vector<int> &ix);
-  bool resolveAmbiguity(const int& one,
-                        const int& two,
-                        const int& three,
-                        const int& four);
-
+  void getCountMatrices_(std::vector<int>& ix);
+  bool resolveAmbiguity_(const int one,
+                         const int two,
+                         const int three,
+                         const int four);
+  double resolveAmbiguity2_(const int a, const int b);
   bool ignore_amb_sites = 0;
-  std::vector<double> getWeights(std::vector<double> &vec);
-  void makeIndexVec();
+  std::vector<double> getWeights_(std::vector<double>& vec);
+  void makeIndexVec_();
 };
 
-inline double Quartet::resolveAmbiguity2(const int& a, const int& b){
+inline double Quartet::resolveAmbiguity2_(const int a, const int b){
   double res = 0.0;
   bool match = 0;
   for(int i = 0; i < baseLookup[a].size(); i++){

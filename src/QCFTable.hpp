@@ -17,8 +17,9 @@ class QCFData;
 
 class QCFEntry {
 public:
-  QCFEntry(int i, int j, int k, int l, int idx){key = {i,j,k,l};
-                                                     index = idx;}
+  QCFEntry(const int i, const int j, const int k,
+           const int l, const int idx){key = {i,j,k,l};
+                                       index = idx;}
   ~QCFEntry(){};
   std::vector<int> key;
   int index;
@@ -32,9 +33,11 @@ public:
   std::vector< std::vector< std::vector<double> > > values;
   //std::vector< std::vector < std::vector<double> > > qtab;
   int nCk(const int& n, int& k);
-  void addValue(int i, int j, int k, int l, std::vector<double> val);
-  void write(std::string pfx);
-  int findIndex(int i, int j, int k, int l);
+  void addValue(const int i, const int j, const int k,
+                const int l, const std::vector<double> val);
+  void write(const std::string pfx);
+  int findIndex(const int i, const int j,
+                const int k, const int l);
   int four = 4, nTaxa, nQrts;
   QCFData* qcfPtr;
 };

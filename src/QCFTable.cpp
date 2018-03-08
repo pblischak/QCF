@@ -27,14 +27,16 @@ QCFTable::QCFTable(QCFData* qcf){
   }
 }
 
-void QCFTable::addValue(int i, int j, int k, int l, std::vector<double> val){
+void QCFTable::addValue(const int i, const int j, const int k,
+                        const int l, const std::vector<double> val){
   int tmpIndex = findIndex(i,j,k,l);
   //std::cout << i << "\t" << j << "\t" << k << "\t" << l << std::endl;
   //std::cout << tmpIndex << std::endl;
   values[tmpIndex].push_back(val);
 }
 
-int QCFTable::findIndex(int i, int j, int k, int l){
+int QCFTable::findIndex(const int i, const int j,
+                        const int k, const int l){
   std::vector<int> tmp = {i,j,k,l};
   int res = -1;
   for(int i = 0; i < lookup.size(); i++){
@@ -49,7 +51,7 @@ int QCFTable::findIndex(int i, int j, int k, int l){
   return res;
 }
 
-void QCFTable::write(std::string pfx){
+void QCFTable::write(const std::string pfx){
   std::ofstream qcfStream;
   qcfStream.open(pfx+"-qcf.CFs.csv", std::ios::out | std::ios::app);
   if(qcfStream.is_open()){

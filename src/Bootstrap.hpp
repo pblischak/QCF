@@ -8,12 +8,13 @@ class Quartet;
 
 class Bootstrap {
 public:
-  Bootstrap(int &nreps);
+  Bootstrap(const int nReps);
   ~Bootstrap(){delete r;}
-  std::vector<double> operator()(Quartet &qrt);
-  void randomVector(int low, int high, std::vector<int> &vec);
+  std::vector<double> operator()(Quartet& qrt);
+  int reps = -999;
+private:
+  void randomVector_(const int low, const int high, std::vector<int>& vec);
   MbRandom* r;
-  int reps = 1;
 };
 
 #endif //BOOTSTRAP_HPP
