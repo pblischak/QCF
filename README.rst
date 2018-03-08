@@ -58,8 +58,8 @@ If you have a problem while running QCF, and you think it may be a bug, please c
 
 |QCF Issues|
 
-.. |Build Status| image:: https://travis-ci.com/pblischak/QCF.svg?branch=master
-   :target: https://travis-ci.com/pblischak/QCF
+.. |Build Status| image:: https://travis-ci.org/pblischak/QCF.svg?branch=master
+   :target: https://travis-ci.org/pblischak/QCF
 
 .. |Documentation| image:: http://readthedocs.org/projects/qcf/badge/?version=latest
    :target: http://qcf.readthedocs.io
