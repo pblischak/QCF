@@ -28,9 +28,9 @@ int main(int argc, char* argv[]){
     exit(EXIT_SUCCESS);
   }
 
-  std::cout << "Please press ENTER to continue: ";
-  std::string in = "";
-  in = std::cin.get();
+  //std::cout << "Please press ENTER to continue: ";
+  //std::string in = "";
+  //in = std::cin.get();
   std::vector<int> empty; // An emty vector to pass if no bootstrapping is done.
   bool bootstrap = 0;
   QCFData qcf(argc, argv);
