@@ -19,7 +19,7 @@ void SeqData::readPhylip_(){
     nSeqs = atoi(val1.c_str());
     nSites = atoi(val2.c_str());
     dna.resize(nSeqs);
-    for(int i = 0; i < nSeqs; i++){
+    for(int i = 0; i < nSeqs; ++i){
       dna[i].resize(nSites);
     }
     while(phyStream >> val1 >> val2){
@@ -33,7 +33,7 @@ void SeqData::readPhylip_(){
         haps.push_back(val1);
         seqIndex.insert({val1, row});
       }
-      for(int s = 0; s < val2.length(); s++){
+      for(size_t s = 0; s < val2.length(); ++s){
         dna[row][s] = convert_(val2[s]);
       }
       row++;
@@ -49,10 +49,10 @@ std::vector<Quartet> SeqData::getQuartets(){
   const int H = haps.size();
   std::vector<int> ordered;
   std::vector<Quartet> qrts;
-  for(int i = 0; i < H - 3; i++){
-    for(int j = i + 1; j < H - 2; j++){
-      for(int k = j + 1; k < H - 1; k++){
-        for(int l = k + 1; l < H; l++){
+  for(int i = 0; i < H - 3; ++i){
+    for(int j = i + 1; j < H - 2; ++j){
+      for(int k = j + 1; k < H - 1; ++k){
+        for(int l = k + 1; l < H; ++l){
           if(qcfPtr->hap2tax[haps[i]] == qcfPtr->hap2tax[haps[j]] ||
              qcfPtr->hap2tax[haps[i]] == qcfPtr->hap2tax[haps[k]] ||
              qcfPtr->hap2tax[haps[i]] == qcfPtr->hap2tax[haps[l]] ||

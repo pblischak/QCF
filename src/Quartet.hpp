@@ -57,14 +57,14 @@ private:
 inline double Quartet::resolveAmbiguity2_(const int a, const int b){
   double res = 0.0;
   bool match = 0;
-  for(int i = 0; i < baseLookup[a].size(); i++){
-    for(int j = 0; j < baseLookup[b].size(); j++){
+  for(size_t i = 0; i < baseLookup[a].size(); ++i){
+    for(size_t j = 0; j < baseLookup[b].size(); ++j){
       if(baseLookup[a][i] == baseLookup[b][j]) {match = 1;}
     }
   }
   if(match){
-    double size1 = baseLookup[a].size();
-    double size2 = baseLookup[b].size();
+    double size1 = (double) baseLookup[a].size();
+    double size2 = (double) baseLookup[b].size();
     res = 1.0 / (size1 * size2);
   } else {
     res = 0.0;

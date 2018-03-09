@@ -27,7 +27,7 @@ void QCFData::parseCommandLine_(const int ac, char* av[]){
   */
   int invalidArgCount = 0;
   std::vector<char*> invalidArgs;
-  for(int i = 1; i < ac; i++){
+  for(int i = 1; i < ac; ++i){
     if(strcmp(av[i], "-i") == 0 || strcmp(av[i], "--infile") == 0){
       infile = av[i + 1];
     } else if(strcmp(av[i], "-m") == 0 || strcmp(av[i], "--map") == 0){
@@ -46,7 +46,7 @@ void QCFData::parseCommandLine_(const int ac, char* av[]){
 
   if(invalidArgCount != 0){
     std::cerr << "\n** ERROR: Unrecognized command line flag(s). **\n" << std::endl;
-    for(unsigned i = 0; i < invalidArgs.size(); i++){
+    for(size_t i = 0; i < invalidArgs.size(); ++i){
       std::cerr << "   " << invalidArgs[i] << std::endl;
     }
     std::cerr << "\nType 'qcf -h' for command line options.\n" << std::endl;
@@ -118,7 +118,7 @@ void QCFData::parseMap_(){
         std::cerr << "Haplotype names could not be split (should be comma delimted).\n" << std::endl;
         exit(EXIT_FAILURE);
       }
-      for(int i = 0; i < str2.size(); i++){
+      for(size_t i = 0; i < str2.size(); ++i){
         hap2tax.insert({str2[i], taxonIndex});
         nHaps++;
       }
@@ -151,7 +151,7 @@ std::vector<SeqData> QCFData::getSeqs(){
 
   */
   std::vector<SeqData> seqs;
-  for(int s = 0; s < seqFiles.size(); s++){
+  for(size_t s = 0; s < seqFiles.size(); ++s){
     SeqData seq(seqFiles[s], this);
     seqs.push_back(seq);
   }

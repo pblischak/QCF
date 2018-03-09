@@ -14,10 +14,10 @@ QCFTable::QCFTable(QCFData* qcf){
     values.push_back(tmp);
   }
   int idx = 0;
-  for(int i = 0; i < nTaxa - 3; i++){
-    for(int j = i+1; j < nTaxa - 2; j++){
-      for(int k = j+1; k < nTaxa - 1; k++){
-        for(int l = k+1; l < nTaxa; l++){
+  for(int i = 0; i < nTaxa - 3; ++i){
+    for(int j = i+1; j < nTaxa - 2; ++j){
+      for(int k = j+1; k < nTaxa - 1; ++k){
+        for(int l = k+1; l < nTaxa; ++l){
           QCFEntry lkp(i, j, k, l, idx);
           lookup.push_back(lkp);
           idx++;
@@ -39,7 +39,7 @@ int QCFTable::findIndex(const int i, const int j,
                         const int k, const int l){
   std::vector<int> tmp = {i,j,k,l};
   int res = -1;
-  for(int i = 0; i < lookup.size(); i++){
+  for(size_t i = 0; i < lookup.size(); ++i){
     if(lookup[i].key == tmp){
       res = lookup[i].index;
       break;
@@ -61,15 +61,15 @@ void QCFTable::write(const std::string pfx){
     exit(EXIT_FAILURE);
   }
   int tmpIndex;
-  for(int i = 0; i < nTaxa - 3; i++){
-    for(int j = i+1; j < nTaxa - 2; j++){
-      for(int k = j+1; k < nTaxa - 1; k++){
-        for(int l = k+1; l < nTaxa; l++){
+  for(int i = 0; i < nTaxa - 3; ++i){
+    for(int j = i+1; j < nTaxa - 2; ++j){
+      for(int k = j+1; k < nTaxa - 1; ++k){
+        for(int l = k+1; l < nTaxa; ++l){
           tmpIndex = findIndex(i,j,k,l);
           double cf12_34 = 0.0, cf13_24 = 0.0, cf14_23 = 0.0, cfSum = 0.0;
           //std::cerr << tmpIndex << "\t" << qcfPtr->taxa[i] << "\t" << qcfPtr->taxa[j] << "\t"
           //          << qcfPtr->taxa[k] << "\t" << qcfPtr->taxa[l] << "\t";
-          for(int v = 0; v < values[tmpIndex].size(); v++){
+          for(size_t v = 0; v < values[tmpIndex].size(); ++v){
             //std::cerr << "{" << values[tmpIndex][v][0] << ","
             //                 << values[tmpIndex][v][1] << ","
             //                 << values[tmpIndex][v][2] << "}\t";

@@ -23,9 +23,9 @@ Quartet::Quartet(const std::string i, const std::string j,
 }
 
 void Quartet::getCountMatrices_(std::vector<int>& ix){
-  assert(ix.size() == seqPtr->nSites);
+  assert((int) ix.size() == seqPtr->nSites);
   for(std::vector<int>::iterator s = ix.begin();
-      s != ix.end(); s++){
+      s != ix.end(); ++s){
     if(seqPtr->dna[A][*s] < 4 &&
        seqPtr->dna[B][*s] < 4 &&
        seqPtr->dna[C][*s] < 4 &&
@@ -61,10 +61,10 @@ bool Quartet::resolveAmbiguity_(const int one,
   } else {
     denom = baseLookup[one].size()   * baseLookup[two].size()
           * baseLookup[three].size() * baseLookup[four].size();
-    for(unsigned i = 0; i < baseLookup[one].size(); i++){
-      for(unsigned j = 0; j < baseLookup[two].size(); j++){
-        for(unsigned k = 0; k < baseLookup[three].size(); k++){
-          for(unsigned r = 0; r < baseLookup[four].size(); r++){
+    for(size_t i = 0; i < baseLookup[one].size(); ++i){
+      for(size_t j = 0; j < baseLookup[two].size(); ++j){
+        for(size_t k = 0; k < baseLookup[three].size(); ++k){
+          for(size_t r = 0; r < baseLookup[four].size(); ++r){
             ABCD[baseLookup[one][i]   * 4 + baseLookup[two][j]]
                 [baseLookup[three][k] * 4 + baseLookup[four][r]]  += 1.0 / denom;
             ACBD[baseLookup[one][i]   * 4 + baseLookup[three][j]]
@@ -87,10 +87,10 @@ std::vector<double> Quartet::eval(std::vector<int>& vec){
   } else {
     getCountMatrices_(vec);
   }
-  for(int i = 0; i < 4; i++){
-    for(int j = 0; j < 4; j++){
-      for(int k = 0; k < 4; k++){
-        for(int l = 0; l < 4; l++){
+  for(int i = 0; i < 4; ++i){
+    for(int j = 0; j < 4; ++j){
+      for(int k = 0; k < 4; ++k){
+        for(int l = 0; l < 4; ++l){
           /*if(i == j && k != l){
             scores[0] += ABCD[i * 4 + j][k * 4 + l];
             scores[1] += ACBD[i * 4 + j][k * 4 + l];
@@ -126,9 +126,9 @@ std::vector<double> Quartet::eval2(std::vector<int>& vec){
   } else {
     ix = vec;
   }
-  assert(ix.size() == seqPtr->nSites);
+  assert((int) ix.size() == seqPtr->nSites);
   for(std::vector<int>::iterator s = ix.begin();
-      s != ix.end(); s++){
+      s != ix.end(); ++s){
     if(seqPtr->dna[A][*s] < 4 &&
        seqPtr->dna[B][*s] < 4 &&
        seqPtr->dna[C][*s] < 4 &&
@@ -169,7 +169,7 @@ std::vector<double> Quartet::getWeights_(std::vector<double>& vec){
   } else if(vec[1] == vec[2] && vec[1] > vec[0]){
     res = {0.0, 0.5, 0.5};
   } else {
-    for(int i = 0; i < 3; i++){
+    for(int i = 0; i < 3; ++i){
       if(vec[i] > maxVal){
         maxIndex = i;
         maxVal   = vec[i];
@@ -187,7 +187,7 @@ std::vector<double> Quartet::getWeights_(std::vector<double>& vec){
 }
 
 void Quartet::makeIndexVec_(){
-  for(int s = 0; s < seqPtr->nSites; s++){
+  for(int s = 0; s < seqPtr->nSites; ++s){
     index.push_back(s);
   }
 }

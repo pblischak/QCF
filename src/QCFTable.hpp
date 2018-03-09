@@ -18,7 +18,7 @@ class QCFData;
 class QCFEntry {
 public:
   QCFEntry(const int i, const int j, const int k,
-           const int l, const int idx){key = {i,j,k,l};
+           const int l, const int idx){key   = {i,j,k,l};
                                        index = idx;}
   ~QCFEntry(){};
   std::vector<int> key;
@@ -32,7 +32,7 @@ public:
   std::vector<QCFEntry> lookup;
   std::vector< std::vector< std::vector<double> > > values;
   //std::vector< std::vector < std::vector<double> > > qtab;
-  int nCk(const int& n, int& k);
+  int nCk(const int n, int k);
   void addValue(const int i, const int j, const int k,
                 const int l, const std::vector<double> val);
   void write(const std::string pfx);
@@ -43,12 +43,12 @@ public:
 };
 
 /* Calculate binomial coefficient. */
-inline int QCFTable::nCk(const int& n, int& k){
+inline int QCFTable::nCk(const int n, int k){
   int res = 1;
   if(k > n - k)
     k = n - k;
 
-  for(long int i = 0; i < k; i++){
+  for(long int i = 0; i < k; ++i){
     res *= (n - i);
     res /= (i + 1.0);
   }

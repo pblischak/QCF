@@ -14,7 +14,7 @@ std::vector<double> Bootstrap::operator()(Quartet& qrt){
   double overallSum;
   std::vector<int> ix(qrt.seqPtr->nSites, 0);
   std::vector<double> bootResults(3, 0.0);
-  for(int i = 0; i < reps; i++){
+  for(int i = 0; i < reps; ++i){
     randomVector_(0, qrt.seqPtr->nSites - 1, ix);
     bootResults = qrt.eval2(ix);
     weightSums[0] += bootResults[0];
@@ -29,7 +29,7 @@ std::vector<double> Bootstrap::operator()(Quartet& qrt){
 }
 
 void Bootstrap::randomVector_(const int low, const int high, std::vector<int>& vec){
-  for(int i = 0; i < vec.size(); i++){
+  for(size_t i = 0; i < vec.size(); ++i){
     vec[i] = r->sampleInteger(low,high);
   }
 }
