@@ -35,8 +35,8 @@ Usage
 After compiling and installing the software, you can use the program in a terminal
 window by typing ``qcf``. Below are the main commands that can be used to estimate
 quartet concordance factors using QCF. More details on input data formats, as well
-as background on interpreting the output, can be found in the `tutorial <>`__ on
-the ReadTheDocs site.
+as background on interpreting the output, can be found in the 
+`tutorial <http://qcf.readthedocs.io/en/latest/tutorial.html>`__ on the ReadTheDocs site.
 
 .. code:: bash
 
