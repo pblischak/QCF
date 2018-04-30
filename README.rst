@@ -1,9 +1,9 @@
-|Build Status| |Documentation|
+|Build Status| |Documentation| |QCF Version|
 
-QCF: Estimating Quartet Concordance Factors
-===========================================
+``qcf``: estimating quartet concordance factors
+===============================================
 
-  **WARNING**: This is an alpha test version of QCF. We are still verifying that it works,
+  **NB**: This is an alpha test version of ``qcf``. We are still verifying that it works,
   and cannot guarantee that it will function correctly. If you wish to test it
   for yourself, please feel free to do so. We would appreciate it if you
   report any strange behavior or bad results as an issue. Thanks!
@@ -14,8 +14,8 @@ QCF: Estimating Quartet Concordance Factors
 Installation
 ~~~~~~~~~~~~
 
-QCF can be installed by cloning this repo and then compiling the main executable
-using the provided ``Makefile`` (see code below). QCF is written in C++ for Unix-like
+``qcf`` can be installed by cloning this repo and then compiling the main executable
+using the provided ``Makefile`` (see code below). ``qcf`` is written in C++ for Unix-like
 operating systems and makes use of features from the C++11 standard, which
 requires a compatible compiler (GNU ``g++`` >= 4.8, Clang ``clang++`` >= 3.3).
 Mac users will also need to have the Xcode
@@ -34,8 +34,8 @@ Usage
 
 After compiling and installing the software, you can use the program in a terminal
 window by typing ``qcf``. Below are the main commands that can be used to estimate
-quartet concordance factors using QCF. More details on input data formats, as well
-as background on interpreting the output, can be found in the 
+quartet concordance factors using ``qcf``. More details on input data formats, as well
+as background on interpreting the output, can be found in the
 `tutorial <http://qcf.readthedocs.io/en/latest/tutorial.html>`__ on the ReadTheDocs site.
 
 .. code:: bash
@@ -50,11 +50,11 @@ as background on interpreting the output, can be found in the
 Getting Help
 ~~~~~~~~~~~~
 
-If you have questions about running QCF, please feel free to use the gitter chatroom to get help:
+If you have questions about running ``qcf``, please feel free to use the gitter chatroom to get help:
 
 |Gitter|
 
-If you have a problem while running QCF, and you think it may be a bug, please consider filing an issue:
+If you have a problem while running ``qcf``, and you think it may be a bug, please consider filing an issue:
 
 |QCF Issues|
 
@@ -67,5 +67,8 @@ If you have a problem while running QCF, and you think it may be a bug, please c
 .. |Gitter| image:: https://badges.gitter.im/Join%20Chat.svg
    :target: https://gitter.im/quartet-cf/Lobby
 
-.. |QCF Issues| image:: https://img.shields.io/badge/QCF-Issues-blue.svg
+.. |QCF Issues| image:: https://img.shields.io/badge/qcf-issues-blue.svg
    :target: https://github.com/pblischak/QCF/issues
+
+.. |QCF Version| image:: https://img.shields.io/badge/qcf-v0.1.3a-orange.svg
+   :target: https://github.com/pblischak/QCF/releases/tag/0.1.3a

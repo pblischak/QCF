@@ -3,8 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-``qcf``: Estimating Quartet Concordance Factors
-===========================================
+``qcf``: estimating quartet concordance factors
+===============================================
+
+|Build Status| |Documentation| |QCF Version|
 
 ``qcf`` is a C++ program for estimating quartet concordance factors
 from multilocus sequence data. It uses the theory of phylogenetic
@@ -24,3 +26,12 @@ Documentation
    getting_started.rst
    tutorial.rst
    api.rst
+
+.. |Build Status| image:: https://travis-ci.org/pblischak/QCF.svg?branch=master
+   :target: https://travis-ci.org/pblischak/QCF
+
+.. |Documentation| image:: http://readthedocs.org/projects/qcf/badge/?version=latest
+   :target: http://qcf.readthedocs.io
+
+.. |QCF Version| image:: https://img.shields.io/badge/qcf-v0.1.3a-orange.svg
+   :target: https://github.com/pblischak/QCF/releases/tag/0.1.3a
