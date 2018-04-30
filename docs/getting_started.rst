@@ -6,12 +6,17 @@ Getting Started
 Installation
 ------------
 
+``qcf`` can be installed by cloning the code from GitHub using the following steps:
+
 .. code:: bash
 
-  git clone https://github.com/pblischak/QCF.git
-  cd QCF
-  make
-  sudo make install
+  git clone https://github.com/pblischak/QCF.git        # 1. Clone the repo from GitHub
+  cd QCF/                                               # 2. cd into the QCF/ folder
+  make                                                  # 3. compile the qcf executable
+  make test                                             # 4. test that the executable works
+  sudo make install                                     # 5. copy executable to /usr/local/bin
+
+Stable versions are also available on the `Releases <https://github.com/pblischak/QCF/releases>`_ page.
 
 Input Files
 -----------
@@ -28,13 +33,13 @@ on each gene individually.
 .. code::
 
     16  500
-  sp1 AGTACAAGGTAGACAGTAGACG...
-  sp2 AGTACAAGGTAGACAGTAGACG...
-  sp3 AGTACAAGGTAGACAGTAGACG...
+  sp1_1 AGTACAAGGTAGACAGTAGACG...
+  sp1_2 AGTACAAGGTAGACAGTAGACG...
+  sp2_1 AGTACAAGGTAGACAGTAGACG...
   .
   .
   .
-  spN AGTACAAGGTAGACAGTAGACG...
+  spN_3 AGTACAAGGTAGACAGTAGACG...
 
 
 Gene List File

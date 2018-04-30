@@ -7,6 +7,9 @@ Below we will go through an example analysis using some simulated data that is
 available in the ``example/`` folder in the
 `QCF GitHub repository <https://github.com/pblischak/QCF>`__.
 
+Step 0: Get ``qcf``
+-------------------
+
 .. code:: bash
 
   # Step 0:
@@ -15,7 +18,11 @@ available in the ``example/`` folder in the
   git clone https://github.com/pblischak/QCF.git
   cd QCF
   make
+  make test
   sudo make install
+
+Step 1: Look at example files
+-----------------------------
 
 .. code:: bash
 
@@ -33,15 +40,22 @@ available in the ``example/`` folder in the
   # Aside:
   # Making the gene list file can be done using
   # the following code within a terminal.
-  ls -1 *.phy > geneFiles.txt
+  ls -1 *.phy > genes.txt.txt
+
+Step 2a: Run ``qcf``
+--------------------
 
 .. code:: bash
 
-  # Step 2:
+  # Step 2a:
   # Now we'll run qcf
-  qcf -i geneFiles.txt -m map.txt --prefix example
+  qcf -i genes.txt -m map.txt --prefix example
+
+Step 2b: Run ``qcf`` with bootstrapping
+---------------------------------------
 
 .. code:: bash
 
-  # Bootstrapping
-  qcf -i geneFiles.txt -m map.txt -b 100 --prefix booted
+  # Step 2b:
+  # Now we'll run qcf with bootstrapping (add -b #)
+  qcf -i genes.txt -m map.txt -b 100 --prefix booted
