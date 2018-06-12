@@ -33,5 +33,5 @@ Documentation
 .. |Documentation| image:: http://readthedocs.org/projects/qcf/badge/?version=latest
    :target: http://qcf.readthedocs.io
 
-.. |QCF Version| image:: https://img.shields.io/badge/qcf-v0.1.3a-orange.svg
-   :target: https://github.com/pblischak/QCF/releases/tag/0.1.3a
+.. |QCF Version| image:: https://img.shields.io/badge/qcf-v0.2.0a-orange.svg
+   :target: https://github.com/pblischak/QCF/releases/tag/0.2.0a
