@@ -35,9 +35,9 @@ is given here:
   cd QCF                                                # 2. cd into the QCF/ folder
   make                                                  # 3. compile the qcf executable
   make test                                             # 4. test that the executable
-                                                             and Python scripts are working
+                                                        #    and Python scripts are working
   sudo make install                                     # 5. copy executable and Python scripts
-                                                             to /usr/local/bin
+                                                        #    to /usr/local/bin
 
 Usage
 ~~~~~
