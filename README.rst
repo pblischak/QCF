@@ -70,5 +70,5 @@ If you have a problem while running ``qcf``, and you think it may be a bug, plea
 .. |QCF Issues| image:: https://img.shields.io/badge/qcf-issues-blue.svg
    :target: https://github.com/pblischak/QCF/issues
 
-.. |QCF Version| image:: https://img.shields.io/badge/qcf-v0.1.3a-orange.svg
+.. |QCF Version| image:: https://img.shields.io/badge/qcf-v0.2.0a-orange.svg
    :target: https://github.com/pblischak/QCF/releases/tag/0.1.3a

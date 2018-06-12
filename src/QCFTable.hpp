@@ -36,6 +36,7 @@ public:
   void addValue(const int i, const int j, const int k,
                 const int l, const std::vector<double> val);
   void write(const std::string pfx);
+  void writeRawQCFs(const std::string pfx);
   int findIndex(const int i, const int j,
                 const int k, const int l);
   int four = 4, nTaxa, nQrts;

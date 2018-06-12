@@ -90,3 +90,33 @@ void QCFTable::write(const std::string pfx){
     }
   }
 }
+
+void QCFTable::writeRawQCFs(const std::string pfx){
+  std::ofstream rawStream;
+  rawStream.open(pfx+"-raw.csv", std::ios::out | std::ios::app);
+  if(rawStream.is_open()){
+    std::cerr << "\nWriting raw QCF values to file..." << std::endl;
+  } else {
+    std::cerr << "ERROR: Could not open outfile: " << pfx << "-qcf.CFs.csv.\n" << std::endl;
+    exit(EXIT_FAILURE);
+  }
+  int tmpIndex;
+  for(int i = 0; i < nTaxa - 3; ++i){
+    for(int j = i+1; j < nTaxa - 2; ++j){
+      for(int k = j+1; k < nTaxa - 1; ++k){
+        for(int l = k+1; l < nTaxa; ++l){
+          tmpIndex = findIndex(i,j,k,l);
+          rawStream << qcfPtr->taxa[i] << "," << qcfPtr->taxa[j] << ","
+                    << qcfPtr->taxa[k] << "," << qcfPtr->taxa[l];
+          for(size_t v = 0; v < values[tmpIndex].size(); ++v){
+            rawStream << ",";
+            rawStream << values[tmpIndex][v][0] << ":"
+                      << values[tmpIndex][v][1] << ":"
+                      << values[tmpIndex][v][2];
+          }
+          rawStream << std::endl;
+        }
+      }
+    }
+  }
+}

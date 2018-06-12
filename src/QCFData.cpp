@@ -36,6 +36,8 @@ void QCFData::parseCommandLine_(const int ac, char* av[]){
       bootReps = atoi(av[i + 1]);
     } else if(strcmp(av[i], "--prefix") == 0){
       prefix = av[i + 1];
+    } else if(strcmp(av[i], "--printRaw") == 0){
+      rawOutput = 1;
     } else if(strcmp(av[i], "-q") == 0 || strcmp(av[i], "--quiet") == 0){
       quiet = 1;
     } else if(av[i][0] == '-'){ /* This checks if it is a flag that isn't valid. */

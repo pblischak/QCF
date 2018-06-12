@@ -19,7 +19,7 @@ public:
   std::unordered_map<std::string, int> hap2tax;
   std::string infile = "none", mapfile = "none";
   int nTaxa = 0, nHaps = 0, bootReps = 0;
-  bool quiet = 0;
+  bool rawOutput = 0, quiet = 0;
   std::string prefix = "out";
 
 private:

@@ -66,6 +66,9 @@ int main(int argc, char* argv[]){
     }
   }
   table.write(qcf.prefix);
+  if(qcf.rawOutput){
+    table.writeRawQCFs(qcf.prefix);
+  }
   return EXIT_SUCCESS;
 }
 
