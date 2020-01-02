@@ -52,7 +52,7 @@ int main(int argc, char* argv[]){
       if(bootstrap){
         res = boot(qrts[q]);
       } else {
-        res = qrts[q].eval2(empty);
+        res = qrts[q].eval3(empty);
       }
       //std::cout << res[0] << "\t" << res[1] << "\t" << res[2] << std::endl;
       //std::cout << qcf.hap2tax[qrts[q].hapA] << std::endl;
