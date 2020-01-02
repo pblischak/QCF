@@ -15,6 +15,7 @@ public:
 
   std::vector<double> eval(std::vector<int>& vec);
   std::vector<double> eval2(std::vector<int>& vec);
+  std::vector<double> eval3(std::vector<int>& vec);
   int A, B, C, D;
   std::string hapA, hapB, hapC, hapD;
   bool resolved = 0;
@@ -43,14 +44,18 @@ public:
   SeqData* seqPtr;
 
 private:
+  double LogDet_(double mat[4][4], double norm);
+  double determinant_(double mat[4][4]);
   void getCountMatrices_(std::vector<int>& ix);
   bool resolveAmbiguity_(const int one,
                          const int two,
                          const int three,
                          const int four);
   double resolveAmbiguity2_(const int a, const int b);
+  double resolveAmbiguity3_(const int a, const int b, double mat[4][4]);
   bool ignore_amb_sites = 0;
   std::vector<double> getWeights_(std::vector<double>& vec);
+  std::vector<double> getWeights2_(std::vector<double>& vec);
   void makeIndexVec_();
 };
 
@@ -71,4 +76,25 @@ inline double Quartet::resolveAmbiguity2_(const int a, const int b){
   }
   return res;
 }
+
+inline double Quartet::determinant_(double mat[4][4]){
+  /*
+  Tried to write some recursive code based on stuff I saw
+  online. Didn't work -- we'll just do it the long way.
+  http://www.euclideanspace.com/maths/algebra/matrix/functions/determinant/fourD/index.htm
+  */
+  return mat[0][3] * mat[1][2] * mat[2][1] * mat[3][0] - mat[0][2] * mat[1][3] * mat[2][1] * mat[3][0] -
+         mat[0][3] * mat[1][1] * mat[2][2] * mat[3][0] + mat[0][1] * mat[1][3] * mat[2][2] * mat[3][0] +
+         mat[0][2] * mat[1][1] * mat[2][3] * mat[3][0] - mat[0][1] * mat[1][2] * mat[2][3] * mat[3][0] -
+         mat[0][3] * mat[1][2] * mat[2][0] * mat[3][1] + mat[0][2] * mat[1][3] * mat[2][0] * mat[3][1] +
+         mat[0][3] * mat[1][0] * mat[2][2] * mat[3][1] - mat[0][0] * mat[1][3] * mat[2][2] * mat[3][1] -
+         mat[0][2] * mat[1][0] * mat[2][3] * mat[3][1] + mat[0][0] * mat[1][2] * mat[2][3] * mat[3][1] +
+         mat[0][3] * mat[1][1] * mat[2][0] * mat[3][2] - mat[0][1] * mat[1][3] * mat[2][0] * mat[3][2] -
+         mat[0][3] * mat[1][0] * mat[2][1] * mat[3][2] + mat[0][0] * mat[1][3] * mat[2][1] * mat[3][2] +
+         mat[0][1] * mat[1][0] * mat[2][3] * mat[3][2] - mat[0][0] * mat[1][1] * mat[2][3] * mat[3][2] -
+         mat[0][2] * mat[1][1] * mat[2][0] * mat[3][3] + mat[0][1] * mat[1][2] * mat[2][0] * mat[3][3] +
+         mat[0][2] * mat[1][0] * mat[2][1] * mat[3][3] - mat[0][0] * mat[1][2] * mat[2][1] * mat[3][3] -
+         mat[0][1] * mat[1][0] * mat[2][2] * mat[3][3] + mat[0][0] * mat[1][1] * mat[2][2] * mat[3][3];
+}
+
 #endif //QUARTET_HPP
