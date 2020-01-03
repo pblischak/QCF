@@ -2,8 +2,9 @@ sudo: true
 language: python
 
 python:
-  - 2.7
+  - 3.5
   - 3.6
+  - 3.7
 
 before_install:
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
