@@ -16,7 +16,9 @@ Installation
   make test                                             # 4. test that the executable works
   sudo make install                                     # 5. copy executable to /usr/local/bin
 
-Stable versions are also available on the `Releases <https://github.com/pblischak/QCF/releases>`_ page.
+The ``sudo make install`` step will also cp all the files in the ``scripts/`` folder
+to ``/usr/local/bin``.
+Stable versions of QCF are also available on the `Releases <https://github.com/pblischak/QCF/releases>`_ page.
 
 Input Files
 -----------
@@ -88,3 +90,14 @@ This format is the same as the one used by
   .
   .
   spN:spN_1,spN_2,spN_3,spN_4
+
+Output Files
+------------
+
+``qcf`` by default will produce an output file that contains the estimated quartet
+concordance factors in a file called ``out-qcf.CFs.csv``. If you also print the raw
+quartet scores, then the program will write another file called ``out-raw.csv``. This
+file contains all of the raw scores for all haplotypes for each species quartet
+(it is not intended to be human readable). The ``out-raw.csv`` file is what can be
+passed to the ``qcf_boot.py`` Python script to conduct bootstrap resampling for confidence
+interval estimation.

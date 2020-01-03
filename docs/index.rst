@@ -3,19 +3,22 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-``qcf``: estimating quartet concordance factors
-===============================================
+``qcf``: quartet concordance factor estimation
+==============================================
 
 |Build Status| |Documentation| |QCF Version|
 
 ``qcf`` is a C++ program for estimating quartet concordance factors
-from multilocus sequence data. It uses the theory of phylogenetic
-invariants to calculate the frequency of gene tree quartets matching
+from multilocus sequence data. It uses the LogDet transformation
+to calculate the frequency of gene tree quartets matching
 the three possible unrooted species tree topologies for a set of four
 taxa. ``qcf`` can handle multiple haplotypes per taxon/population, and outputs a
-CSV file that is compatible with the SNaQ method for phylogenetic network
+CSV file that can be used to infer a species tree using scripts from the
+`TICR pipeline <https://github.com/nstenz/TICR>`__
+and is compatible with the SNaQ method for phylogenetic network
 inference implemented in the Julia package
 `PhyloNetworks <http://crsl4.github.io/PhyloNetworks.jl/latest/>`__.
+
 
 Documentation
 -------------
@@ -25,7 +28,6 @@ Documentation
 
    getting_started.rst
    tutorial.rst
-   api.rst
 
 .. |Build Status| image:: https://travis-ci.org/pblischak/QCF.svg?branch=master
    :target: https://travis-ci.org/pblischak/QCF
