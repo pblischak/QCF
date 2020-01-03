@@ -3,11 +3,6 @@
 ``qcf``: estimating quartet concordance factors
 ===============================================
 
-  **NB**: This is an alpha-test version of ``qcf``. We are still adding and
-  testing new features, but if you would like give the software a try
-  for yourself, please feel free to do so. We would appreciate it if you
-  report any strange behavior or bad results as an issue. Thanks!
-
 `Read the Docs <http://qcf.readthedocs.io/>`__
 ==============================================
 
@@ -22,7 +17,7 @@ Mac users will also need to have the Xcode
 `Command Line Tools <http://osxdaily.com/2014/02/12/install-command-line-tools-mac-os-x/>`__ installed.
 
 The software also comes with several Python scripts for processing and analyzing output.
-These scripts have been tested on Python versions 2.7 and 3.6, and require the ``numpy``
+These scripts have been tested on Python versions 3.5-3.7, and require the ``numpy``
 package, which can be installed as follows: ``pip install numpy``.
 
 The steps to compile, test, and install ``qcf`` and the associated scripts

@@ -21,7 +21,6 @@ Output
     resampling the genes for a given quartet.
 """
 
-#from __future__ import print_function, division, unicode_literals
 from sys import argv, exit
 import argparse
 import numpy as np
