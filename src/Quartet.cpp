@@ -262,10 +262,14 @@ std::vector<double> Quartet::eval3(std::vector<int>& vec){
 
   double minVal = njVec[0];
   int minIndex = 0;
+  std::vector<int> minIndices = {0};
   for(int i = 1; i < 6; ++i){
     if(njVec[i] < minVal){
       minIndex = i;
+      minIndices = {i};
       minVal = njVec[i];
+    } else if(njVec[i] == minVal || abs(njVec[i] - minVal) < 1.0e-4){
+      minIndices.push_back(i);
     }
   }
 
@@ -276,7 +280,20 @@ std::vector<double> Quartet::eval3(std::vector<int>& vec){
   //scores[1] = njAC;// + njBD;
   //scores[2] = njAD;// + njBC;
   //weights = getWeights2_(scores);
-  return weights[minIndex];
+  std::vector<double> combinedWeights = {0.0,0.0,0.0};
+  if(minIndices.size() > 1){
+    for(size_t i = 0; i < minIndices.size(); ++i){
+      for(int j = 0; j < 3; ++j){
+        combinedWeights[j] += weights[minIndices[i]][j];
+      }
+    }
+    for(int k = 0; k < 3; ++k){
+      combinedWeights[k] /= (double) minIndices.size();
+    }
+    return combinedWeights;
+  } else {
+    return weights[minIndex];
+  }
 }
 
 double Quartet::LogDet_(double mat[4][4], double norm){
